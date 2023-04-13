@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.geekorum.aboutoss.ui"
+    namespace = "com.geekorum.aboutoss.ui.material"
     compileSdk = 33
 
     defaultConfig {
@@ -45,16 +45,9 @@ dependencies {
     implementation(project(":ui:common"))
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.compose.material)
-    implementation(libs.androidx.lifecycle.viewmodel)
-    implementation(libs.androidx.activity)
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.navigation.compose)
-    implementation(libs.geekdroid) {
-        //TODO get rid of dagger platform in geekdroid
-        exclude("com.google.dagger", "dagger-platform")
-    }
 
-    implementation(libs.appcompat)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)

@@ -19,7 +19,7 @@
  * You should have received a copy of the GNU General Public License
  * along with AboutOss.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.geekorum.aboutoss.ui
+package com.geekorum.aboutoss.ui.material
 
 import android.net.Uri
 import android.os.Bundle

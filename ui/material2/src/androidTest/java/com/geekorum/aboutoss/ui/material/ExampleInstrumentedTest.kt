@@ -19,7 +19,7 @@
  * You should have received a copy of the GNU General Public License
  * along with AboutOss.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.geekorum.aboutoss.ui
+package com.geekorum.aboutoss.ui.material
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -40,6 +40,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("com.geekorum.aboutoss.ui.test", appContext.packageName)
+        assertEquals("com.geekorum.aboutoss.ui.material.test", appContext.packageName)
     }
 }

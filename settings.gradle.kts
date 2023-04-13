@@ -19,5 +19,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "AboutOss"
 include(":core")
-include(":ui")
 include(":ui:common")
+include(":ui:material2")

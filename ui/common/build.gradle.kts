@@ -35,7 +35,7 @@ android {
 
 dependencies {
     implementation(project(":core"))
-    implementation(libs.appcompat)
+    api(libs.appcompat)
     implementation(libs.androidx.lifecycle.viewmodel)
     implementation(libs.androidx.activity)
     implementation(libs.geekdroid) {
