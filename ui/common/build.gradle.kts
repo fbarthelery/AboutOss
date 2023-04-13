@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.geekorum.aboutoss.ui"
+    namespace = "com.geekorum.aboutoss.ui.common"
     compileSdk = 33
 
     defaultConfig {
@@ -31,30 +31,19 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-
-    buildFeatures {
-        compose = true
-    }
-
-    composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.androidx.compose.compiler.get()
-    }
 }
 
 dependencies {
-    implementation(project(":ui:common"))
-    implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.androidx.compose.material)
+    implementation(project(":core"))
+    implementation(libs.appcompat)
     implementation(libs.androidx.lifecycle.viewmodel)
     implementation(libs.androidx.activity)
-    implementation(libs.androidx.activity.compose)
-    implementation(libs.androidx.navigation.compose)
     implementation(libs.geekdroid) {
         //TODO get rid of dagger platform in geekdroid
         exclude("com.google.dagger", "dagger-platform")
     }
 
-    implementation(libs.appcompat)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)

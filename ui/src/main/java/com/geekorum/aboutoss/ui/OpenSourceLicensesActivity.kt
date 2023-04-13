@@ -24,21 +24,15 @@ package com.geekorum.aboutoss.ui
 import android.net.Uri
 import android.os.Bundle
 import androidx.activity.compose.setContent
-import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.geekorum.aboutoss.ui.common.BaseOpensourceLicenseActivity
+import com.geekorum.aboutoss.ui.common.OpenSourceLicensesViewModel
 
-class OpenSourceLicensesActivity : AppCompatActivity() {
-
-    private val viewModel: OpenSourceLicensesViewModel by viewModels(
-        factoryProducer = {
-            OpenSourceLicensesViewModel.Factory
-        }
-    )
+class OpenSourceLicensesActivity : BaseOpensourceLicenseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

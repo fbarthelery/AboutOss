@@ -49,6 +49,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import com.geekorum.aboutoss.ui.common.OpenSourceLicensesViewModel
+import com.geekorum.aboutoss.ui.common.R as commonR
 
 @Composable
 fun OpenSourceDependenciesListScreen(
@@ -81,7 +83,7 @@ fun OpenSourceDependenciesListScreen(
         if (hasScrolled) 4.dp else 0.dp
     )
     Scaffold(topBar = {
-        TopAppBar(title = { Text(stringResource(R.string.title_oss_licenses)) },
+        TopAppBar(title = { Text(stringResource(commonR.string.title_oss_licenses)) },
             navigationIcon = {
                 IconButton(onClick = onUpClick) {
                     Icon(

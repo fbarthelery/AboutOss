@@ -56,6 +56,7 @@ import androidx.compose.ui.text.withAnnotation
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
+import com.geekorum.aboutoss.ui.common.OpenSourceLicensesViewModel
 
 @Composable
 fun OpenSourceLicenseScreen(
