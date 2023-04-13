@@ -57,7 +57,7 @@ repositories {
 
 dependencies {
     implementation("com.android.tools.build:gradle:8.0.0")
-    implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.0")
+    implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.20")
     implementation("gradle.plugin.com.hierynomus.gradle.plugins:license-gradle-plugin:0.16.1")
 
     implementation("com.geekorum.gradle.avdl:plugin:0.0.3")
