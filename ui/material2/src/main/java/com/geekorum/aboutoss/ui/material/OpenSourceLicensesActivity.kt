@@ -37,14 +37,22 @@ class OpenSourceLicensesActivity : BaseOpensourceLicenseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            MaterialTheme {
+            themeProvider {
                 DependencyNavHost(
                     openSourceLicensesViewModel = viewModel,
                     navigateUp = {
-                        onNavigateUp()
+                        if (!onNavigateUp()) {
+                            finish()
+                        }
                     }
                 )
             }
+        }
+    }
+
+    companion object {
+        var themeProvider: @Composable (@Composable () -> Unit) -> Unit = { content ->
+            MaterialTheme(content = content)
         }
     }
 }
