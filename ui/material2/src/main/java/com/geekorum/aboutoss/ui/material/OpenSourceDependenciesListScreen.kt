@@ -52,6 +52,13 @@ import androidx.compose.ui.unit.dp
 import com.geekorum.aboutoss.ui.common.OpenSourceLicensesViewModel
 import com.geekorum.aboutoss.ui.common.R as commonR
 
+/**
+ * Display the list of dependencies used in the application
+ *
+ * @param viewModel the [OpenSourceLicensesViewModel] to use
+ * @param onDependencyClick lambda to execute on click on one dependency item
+ * @param onUpClick lambda to execute on click on the up arrow
+ */
 @Composable
 fun OpenSourceDependenciesListScreen(
     viewModel: OpenSourceLicensesViewModel,
@@ -66,6 +73,13 @@ fun OpenSourceDependenciesListScreen(
     )
 }
 
+/**
+ * Display the list of dependencies used in the application
+ *
+ * @param dependencies the list of dependencies
+ * @param onDependencyClick lambda to execute on click on one dependency item
+ * @param onUpClick lambda to execute on click on the up arrow
+ */
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun OpenSourceDependenciesListScreen(
@@ -80,7 +94,8 @@ fun OpenSourceDependenciesListScreen(
         }
     }
     val topBarElevation by animateDpAsState(
-        if (hasScrolled) 4.dp else 0.dp
+        if (hasScrolled) 4.dp else 0.dp,
+        label = "topBarElevation"
     )
     Scaffold(topBar = {
         TopAppBar(title = { Text(stringResource(commonR.string.title_oss_licenses)) },

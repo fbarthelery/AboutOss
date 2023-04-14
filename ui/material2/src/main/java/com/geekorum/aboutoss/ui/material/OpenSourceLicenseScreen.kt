@@ -58,18 +58,25 @@ import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
 import com.geekorum.aboutoss.ui.common.OpenSourceLicensesViewModel
 
+/**
+ * Display the opensource license of a dependency
+ *
+ * @param viewModel the [OpenSourceLicensesViewModel] to use
+ * @param dependency the dependency
+ * @param onUpClick lambda to execute on click on the up arrow
+ */
 @Composable
 fun OpenSourceLicenseScreen(
     viewModel: OpenSourceLicensesViewModel,
     dependency: String,
-    onBackClick: () -> Unit,
+    onUpClick: () -> Unit,
 ) {
     val context = LocalContext.current
     val license by viewModel.getLicenseDependency(dependency).collectAsState("")
     OpenSourceLicenseScreen(
         dependency = dependency,
         license = license,
-        onBackClick = onBackClick,
+        onUpClick = onUpClick,
         onUrlClick = {
             viewModel.openLinkInBrowser(context, it)
         },
@@ -80,12 +87,21 @@ fun OpenSourceLicenseScreen(
     )
 }
 
+/**
+ * Display the opensource license of a dependency
+ *
+ * @param dependency the dependency
+ * @param license the opensource license text
+ * @param onUpClick lambda to execute on click on the up arrow
+ * @param onUrlClick lambda to execute on click on a url
+ * @param onUrlsFound lambda to execute when all urls in the license have been found
+ */
 @OptIn(ExperimentalLayoutApi::class, ExperimentalTextApi::class)
 @Composable
 fun OpenSourceLicenseScreen(
     dependency: String,
     license: String,
-    onBackClick: () -> Unit,
+    onUpClick: () -> Unit,
     onUrlClick: (String) -> Unit,
     onUrlsFound: (List<String>) -> Unit,
 ) {
@@ -101,12 +117,13 @@ fun OpenSourceLicenseScreen(
         derivedStateOf { scrollState.value > 0 }
     }
     val topBarElevation by animateDpAsState(
-        if (hasScrolled) 4.dp else 0.dp
+        if (hasScrolled) 4.dp else 0.dp,
+        label = "topBarElevation"
     )
     Scaffold(topBar = {
         TopAppBar(title = { Text(dependency, overflow = TextOverflow.Ellipsis, maxLines = 1) },
             navigationIcon = {
-                IconButton(onClick = onBackClick) {
+                IconButton(onClick = onUpClick) {
                     Icon(
                         Icons.Default.ArrowBack,
                         contentDescription = null
@@ -148,7 +165,7 @@ fun OpenSourceLicenseScreen(
 /**
  * https://regexr.com/37i6s
  */
-private val UrlRegexp = """https?://(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_+.~#?&/=]*)""".toRegex()
+private val urlRegexp = """https?://(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_+.~#?&/=]*)""".toRegex()
 
 @OptIn(ExperimentalTextApi::class)
 @Composable
@@ -160,7 +177,7 @@ private fun linkifyText(text: String): AnnotatedString {
     return remember(text, style) {
         buildAnnotatedString {
             var currentIdx = 0
-            for (match in UrlRegexp.findAll(text)) {
+            for (match in urlRegexp.findAll(text)) {
                 if (currentIdx < match.range.first) {
                     append(text.substring(currentIdx, match.range.first))
                 }

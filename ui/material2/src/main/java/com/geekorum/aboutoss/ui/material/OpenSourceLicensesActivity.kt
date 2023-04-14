@@ -32,6 +32,13 @@ import androidx.navigation.compose.rememberNavController
 import com.geekorum.aboutoss.ui.common.BaseOpensourceLicenseActivity
 import com.geekorum.aboutoss.ui.common.OpenSourceLicensesViewModel
 
+/**
+ * Activity to display opensource license information
+ *
+ * This activity use Material compose to create the UI.
+ * You can specify the Material theme to use by setting [themeProvider]
+ * before launching the activity
+ */
 class OpenSourceLicensesActivity : BaseOpensourceLicenseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,6 +58,10 @@ class OpenSourceLicensesActivity : BaseOpensourceLicenseActivity() {
     }
 
     companion object {
+        /**
+         * The composable Theme function to set the theme of the UI in [OpenSourceLicensesActivity]
+         * Default to base material theme [MaterialTheme]
+         */
         var themeProvider: @Composable (@Composable () -> Unit) -> Unit = { content ->
             MaterialTheme(content = content)
         }
@@ -79,7 +90,7 @@ fun DependencyNavHost(
             OpenSourceLicenseScreen(
                 viewModel = openSourceLicensesViewModel,
                 dependency = dependency,
-                onBackClick = {
+                onUpClick = {
                     navController.popBackStack()
                 },
             )

@@ -37,6 +37,9 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 
+/**
+ * Manage opensource license information and allow to display them in an UI
+ */
 class OpenSourceLicensesViewModel constructor(
     private val licenseInfoRepository: LicenseInfoRepository,
     private val browserLauncher: BrowserLauncher,

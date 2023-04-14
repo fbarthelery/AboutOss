@@ -25,6 +25,9 @@ import android.content.Context
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 
+/**
+ * Retrieve License information stored in application resources
+ */
 class LicenseInfoRepository(
     private val appContext: Context,
     private val mainCoroutineDispatcher: CoroutineDispatcher,
