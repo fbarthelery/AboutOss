@@ -21,3 +21,4 @@ rootProject.name = "AboutOss"
 include(":core")
 include(":ui:common")
 include(":ui:material2")
+include(":ui:material3")
