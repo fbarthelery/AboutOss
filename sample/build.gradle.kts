@@ -24,6 +24,14 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("com.geekorum.build.source-license-checker")
+    alias(libs.plugins.google.gms.oss.license)
+}
+
+// workaround bug https://issuetracker.google.com/issues/275534543
+buildscript {
+    dependencies {
+        classpath("com.android.tools.build:gradle:8.0.0")
+    }
 }
 
 android {
@@ -61,6 +69,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = libs.versions.androidx.compose.compiler.get()
@@ -73,9 +82,19 @@ android {
 }
 
 dependencies {
+    implementation(project(":core"))
+    implementation(project(":ui:common"))
     implementation(project(":ui:material2"))
     implementation(project(":ui:material3"))
 
+    implementation(libs.geekdroid) {
+        //TODO get rid of dagger platform in geekdroid
+        exclude("com.google.dagger", "dagger-platform")
+    }
+
+
+    implementation(libs.androidx.lifecycle.viewmodel)
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.androidx.activity.compose)
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.compose.ui)
