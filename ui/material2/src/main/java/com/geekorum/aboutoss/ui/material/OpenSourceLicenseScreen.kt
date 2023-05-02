@@ -149,12 +149,12 @@ fun OpenSourceLicenseScreen(
 
         Text(linkifiedLicense,
             modifier = Modifier
+                .padding(paddingValues)
+                .consumeWindowInsets(paddingValues)
                 .padding(horizontal = 16.dp)
                 .fillMaxSize()
                 .then(pressIndicator)
-                .verticalScroll(scrollState)
-                .padding(paddingValues)
-                .consumeWindowInsets(paddingValues),
+                .verticalScroll(scrollState),
             onTextLayout = {
                 layoutResult.value = it
             }

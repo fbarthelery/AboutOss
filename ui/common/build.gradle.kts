@@ -75,7 +75,7 @@ dependencies {
     api(libs.appcompat)
     implementation(libs.androidx.lifecycle.viewmodel)
     implementation(libs.androidx.activity)
-    implementation(libs.geekdroid) {
+    api(libs.geekdroid) {
         //TODO get rid of dagger platform in geekdroid
         exclude("com.google.dagger", "dagger-platform")
     }

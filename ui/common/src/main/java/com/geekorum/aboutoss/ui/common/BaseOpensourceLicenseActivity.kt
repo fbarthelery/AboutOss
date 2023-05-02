@@ -25,7 +25,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 
 abstract class BaseOpensourceLicenseActivity : AppCompatActivity() {
-    protected val viewModel: OpenSourceLicensesViewModel by viewModels(
+    protected open val viewModel: OpenSourceLicensesViewModel by viewModels(
         factoryProducer = {
             OpenSourceLicensesViewModel.Factory
         }

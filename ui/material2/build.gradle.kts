@@ -78,7 +78,7 @@ android {
 }
 
 dependencies {
-    implementation(project(":ui:common"))
+    api(project(":ui:common"))
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.compose.material)
     implementation(libs.androidx.activity.compose)

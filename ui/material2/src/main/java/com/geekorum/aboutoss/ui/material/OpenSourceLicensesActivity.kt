@@ -39,7 +39,7 @@ import com.geekorum.aboutoss.ui.common.OpenSourceLicensesViewModel
  * You can specify the Material theme to use by setting [themeProvider]
  * before launching the activity
  */
-class OpenSourceLicensesActivity : BaseOpensourceLicenseActivity() {
+open class OpenSourceLicensesActivity : BaseOpensourceLicenseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
