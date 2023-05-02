@@ -32,6 +32,8 @@ class LicenseInfoRepository(
     private val appContext: Context,
     private val mainCoroutineDispatcher: CoroutineDispatcher,
     private val ioCoroutineDispatcher: CoroutineDispatcher,
+    private val thirdPartyLicensesResourceName: String = "third_party_licenses",
+    private val thirdPartyLicenseMetadataResourceName: String = "third_party_license_metadata"
 ) {
 
     private var licensesInfo: Map<String, String>? = null
@@ -51,14 +53,14 @@ class LicenseInfoRepository(
     private suspend fun parseLicenses() = withContext(mainCoroutineDispatcher) {
         if (licensesInfo == null) {
             val licenses = withContext(ioCoroutineDispatcher) {
-                OssLicenseParser.openDefaultThirdPartyLicenses(appContext).use { licensesInput ->
-                    OssLicenseParser.openDefaultThirdPartyLicensesMetadata(appContext)
+                OssLicenseParser.openRawResourcesByName(appContext, thirdPartyLicensesResourceName).use { licensesInput ->
+                    OssLicenseParser.openRawResourcesByName(appContext, thirdPartyLicenseMetadataResourceName)
                         .use { licensesMetadataInput ->
-                            val parser = OssLicenseParser(
+                            val parser = OssLicenseParser()
+                            parser.parseLicenses(
                                 thirdPartyLicensesInput = licensesInput,
                                 thirdPartyLicensesMetadataInput = licensesMetadataInput
                             )
-                            parser.parseLicenses()
                         }
                 }
             }
