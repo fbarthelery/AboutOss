@@ -22,8 +22,11 @@
 package com.geekorum.aboutoss.core
 
 import android.content.Context
+import com.geekorum.aboutoss.core.gms.OssLicenseParser
+import com.geekorum.aboutoss.core.gms.openRawResourcesByName
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
+import okio.source
 
 /**
  * Retrieve License information stored in application resources
@@ -58,8 +61,8 @@ class LicenseInfoRepository(
                         .use { licensesMetadataInput ->
                             val parser = OssLicenseParser()
                             parser.parseLicenses(
-                                thirdPartyLicensesInput = licensesInput,
-                                thirdPartyLicensesMetadataInput = licensesMetadataInput
+                                thirdPartyLicensesInput = licensesInput.source(),
+                                thirdPartyLicensesMetadataInput = licensesMetadataInput.source()
                             )
                         }
                 }

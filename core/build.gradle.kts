@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 /*
  * AboutOss is an utility library to retrieve and display
  * opensource licenses in Android applications.
@@ -21,13 +23,41 @@
  */
 plugins {
     id("com.android.library")
-    kotlin("android")
+    kotlin("multiplatform")
     id("com.geekorum.build.source-license-checker")
     `maven-publish`
 }
 
 group = "com.geekorum.aboutoss"
 version = "0.1.0"
+
+kotlin {
+    androidTarget {
+        compilerOptions {
+            jvmTarget.set(JvmTarget.JVM_17)
+        }
+    }
+
+    jvm("desktop")
+
+    listOf(
+        iosX64(),
+        iosArm64(),
+        iosSimulatorArm64(),
+    ).forEach { iosTarget ->
+        iosTarget.binaries.framework {
+            baseName = "aboutoss-core"
+            isStatic = true
+        }
+    }
+
+    sourceSets {
+        commonMain.dependencies {
+            implementation(libs.okio)
+            implementation(libs.kotlinx.coroutines)
+        }
+    }
+}
 
 android {
     namespace = "com.geekorum.aboutoss.core"
@@ -53,11 +83,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
-    kotlinOptions {
-        jvmTarget = "1.8"
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 
     publishing {
@@ -69,8 +96,6 @@ android {
 }
 
 dependencies {
-    implementation(libs.okio)
-    implementation(libs.kotlinx.coroutines)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
