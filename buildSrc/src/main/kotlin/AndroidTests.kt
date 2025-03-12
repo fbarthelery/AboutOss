@@ -41,7 +41,7 @@ const val androidxTestRunnerVersion = "1.4.0"
 const val androidxTestCoreVersion = "1.4.0"
 const val robolectricVersion = "4.8.2"
 
-private typealias BaseExtension = CommonExtension<*, *, DefaultConfig, *>
+private typealias BaseExtension = CommonExtension<*, *, DefaultConfig, *, *, *>
 
 /*
  * Configuration for espresso and robolectric usage in an Android project

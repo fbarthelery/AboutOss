@@ -36,7 +36,7 @@ buildscript {
 
 android {
     namespace = "com.geekorum.aboutoss.sampleapp"
-    compileSdk = 33
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.geekorum.aboutoss.sampleapp"

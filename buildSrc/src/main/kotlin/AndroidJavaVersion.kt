@@ -35,10 +35,10 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinJvmOptions
  */
 @Suppress("UNCHECKED_CAST")
 fun BaseExtension.configureJavaVersion() {
-    (this as CommonExtension<*, *, DefaultConfig, *>).configureJavaVersion()
+    (this as CommonExtension<*, *, DefaultConfig, *, *, *>).configureJavaVersion()
 }
 
-fun CommonExtension<*, *, DefaultConfig, *>.configureJavaVersion() {
+fun CommonExtension<*, *, DefaultConfig, *, *, *>.configureJavaVersion() {
     val api = defaultConfig.minSdk ?: 1
     val version = when {
         api >= 30 -> JavaVersion.VERSION_11

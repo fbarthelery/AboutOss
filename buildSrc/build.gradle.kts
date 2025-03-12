@@ -54,8 +54,16 @@ repositories {
     gradlePluginPortal()
 }
 
+// see https://github.com/gradle/gradle/issues/17963
+fun Provider<PluginDependency>.gav(): String {
+    val t = get()
+    val id = t.pluginId
+    val version = t.version
+    return "$id:$id.gradle.plugin:$version"
+}
+
 dependencies {
-    implementation("com.android.tools.build:gradle:8.0.0")
+    implementation(libs.plugins.com.android.application.gav())
     implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.20")
     implementation("gradle.plugin.com.hierynomus.gradle.plugins:license-gradle-plugin:0.16.1")
 
