@@ -64,7 +64,7 @@ fun Provider<PluginDependency>.gav(): String {
 
 dependencies {
     implementation(libs.plugins.com.android.application.gav())
-    implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.20")
+    implementation(libs.plugins.org.jetbrains.kotlin.android.gav())
     implementation("gradle.plugin.com.hierynomus.gradle.plugins:license-gradle-plugin:0.16.1")
 
     implementation("com.geekorum.gradle.avdl:plugin:0.0.3")

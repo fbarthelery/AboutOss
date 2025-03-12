@@ -22,6 +22,7 @@
 plugins {
     id("com.android.library")
     kotlin("android")
+    alias(libs.plugins.org.jetbrains.kotlin.compose.compiler)
     id("com.geekorum.build.source-license-checker")
     `maven-publish`
 }
@@ -63,10 +64,6 @@ android {
 
     buildFeatures {
         compose = true
-    }
-
-    composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.androidx.compose.compiler.get()
     }
 
     publishing {

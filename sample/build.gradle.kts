@@ -24,6 +24,7 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("com.geekorum.build.source-license-checker")
+    alias(libs.plugins.org.jetbrains.kotlin.compose.compiler)
     alias(libs.plugins.google.gms.oss.license)
 }
 
@@ -70,9 +71,6 @@ android {
     buildFeatures {
         compose = true
         buildConfig = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.androidx.compose.compiler.get()
     }
     packaging {
         resources {
