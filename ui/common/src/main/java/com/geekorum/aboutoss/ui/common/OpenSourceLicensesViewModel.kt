@@ -30,6 +30,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.geekorum.aboutoss.core.LicenseInfoRepository
+import com.geekorum.aboutoss.core.gms.GmsLicenseInfoRepository
 import com.geekorum.geekdroid.network.BrowserLauncher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.SharingStarted
@@ -74,7 +75,7 @@ class OpenSourceLicensesViewModel constructor(
         val Factory = viewModelFactory {
             initializer {
                 val application = this[APPLICATION_KEY]!!
-                val licenseInfoRepository = LicenseInfoRepository(
+                val licenseInfoRepository = GmsLicenseInfoRepository(
                     appContext = application,
                     mainCoroutineDispatcher = Dispatchers.Main,
                     ioCoroutineDispatcher = Dispatchers.IO
