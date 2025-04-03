@@ -55,15 +55,12 @@ class GmsLicenseInfoRepository(
     private suspend fun parseLicenses() = withContext(mainCoroutineDispatcher) {
         if (licensesInfo == null) {
             val licenses = withContext(ioCoroutineDispatcher) {
-                OssLicenseParser.openRawResourcesByName(appContext, thirdPartyLicensesResourceName).use { licensesInput ->
-                    OssLicenseParser.openRawResourcesByName(appContext, thirdPartyLicenseMetadataResourceName)
-                        .use { licensesMetadataInput ->
-                            val parser = OssLicenseParser()
-                            parser.parseLicenses(
-                                thirdPartyLicensesInput = licensesInput.source(),
-                                thirdPartyLicensesMetadataInput = licensesMetadataInput.source()
-                            )
-                        }
+                val parser = OssLicenseParser(
+                    thirdPartyLicensesSource = OssLicenseParser.openRawResourcesByName(appContext, thirdPartyLicensesResourceName).source(),
+                    thirdPartyLicensesMetadataSource = OssLicenseParser.openRawResourcesByName(appContext, thirdPartyLicenseMetadataResourceName).source()
+                )
+                parser.use {
+                    it.parseLicenses()
                 }
             }
             licensesInfo = licenses
