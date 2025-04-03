@@ -55,6 +55,7 @@ kotlin {
         commonMain.dependencies {
             implementation(libs.okio)
             implementation(libs.kotlinx.coroutines)
+            implementation(libs.kotlinx.serialization.json)
         }
     }
 }
