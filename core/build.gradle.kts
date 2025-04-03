@@ -25,6 +25,7 @@ plugins {
     id("com.android.library")
     kotlin("multiplatform")
     id("com.geekorum.build.source-license-checker")
+    alias(libs.plugins.org.jetbrains.kotlinx.serialization)
     `maven-publish`
 }
 

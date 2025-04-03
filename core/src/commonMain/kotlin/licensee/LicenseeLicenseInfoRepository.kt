@@ -24,10 +24,7 @@ package com.geekorum.aboutoss.core.licensee
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.ExperimentalSerializationApi
-import kotlinx.serialization.Serializable
-import kotlinx.serialization.json.Json
 import okio.Source
-import okio.buffer
 
 class LicenseeLicenseInfoRepository(
     private val produceInput: suspend () -> Source,
@@ -62,60 +59,3 @@ class LicenseeLicenseInfoRepository(
     }
 }
 
-
-private class LicenseeParser(
-    input: Source
-): AutoCloseable {
-    private val buffered = input.buffer()
-
-    fun readLicensee(): Map<String, String> {
-        val json = Json {
-            ignoreUnknownKeys = true
-        }
-        val items: List<LicenseItem> = json.decodeFromString(buffered.readUtf8())
-
-        return items.associate {
-            val name = it.name ?: "${it.groupId}:${it.artifactId}"
-            val license = it.spdxLicenses.firstNotNullOfOrNull {
-                "${it.name}\n\n${it.url}"
-            } ?: it.unknownLicenses.firstNotNullOf {
-                "${it.name}\n\n${it.url}"
-            }
-            name to license
-        }
-    }
-
-    override fun close() {
-        buffered.close()
-    }
-}
-
-
-@Serializable
-private data class LicenseItem(
-    val groupId: String,
-    val artifactId: String,
-    val version: String,
-    val spdxLicenses: List<SpdxLicense> = emptyList(),
-    val unknownLicenses: List<UnknownLicense> = emptyList(),
-    val name: String? = null,
-    val scm: Scm? = null,
-)
-
-@Serializable
-private data class SpdxLicense(
-    val identifier: String,
-    val name: String,
-    val url: String,
-)
-
-@Serializable
-private data class UnknownLicense(
-    val name: String,
-    val url: String
-)
-
-@Serializable
-private data class Scm(
-    val url: String,
-)
