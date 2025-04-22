@@ -25,6 +25,7 @@ import android.app.Activity
 import android.net.Uri
 import android.os.Bundle
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -35,8 +36,12 @@ import androidx.core.view.WindowCompat
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.geekorum.aboutoss.core.gms.GmsLicenseInfoRepository
 import com.geekorum.aboutoss.ui.common.BaseOpensourceLicenseActivity
+import com.geekorum.aboutoss.ui.common.Factory
 import com.geekorum.aboutoss.ui.common.OpenSourceLicensesViewModel
+import com.geekorum.aboutoss.ui.material3.OpenSourceLicensesActivity.Companion.themeProvider
+import kotlinx.coroutines.Dispatchers
 
 /**
  * Activity to display opensource license information
@@ -46,6 +51,16 @@ import com.geekorum.aboutoss.ui.common.OpenSourceLicensesViewModel
  * before launching the activity
  */
 open class OpenSourceLicensesActivity : BaseOpensourceLicenseActivity() {
+    override val viewModel: OpenSourceLicensesViewModel by viewModels(
+        factoryProducer = {
+            val gmsLicenseInfoRepository = GmsLicenseInfoRepository(
+                appContext = applicationContext,
+                mainCoroutineDispatcher = Dispatchers.Main,
+                ioCoroutineDispatcher = Dispatchers.IO,
+            )
+            OpenSourceLicensesViewModel.Factory(gmsLicenseInfoRepository)
+        }
+    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

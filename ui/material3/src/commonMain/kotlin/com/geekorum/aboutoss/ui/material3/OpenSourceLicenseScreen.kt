@@ -22,22 +22,43 @@
 package com.geekorum.aboutoss.ui.material3
 
 import androidx.compose.foundation.gestures.detectTapGestures
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.consumeWindowInsets
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.rememberTopAppBarState
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.input.pointer.pointerInput
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.text.*
+import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.ExperimentalTextApi
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.TextLayoutResult
+import androidx.compose.ui.text.UrlAnnotation
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.text.withAnnotation
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
-import androidx.core.net.toUri
 import com.geekorum.aboutoss.ui.common.OpenSourceLicensesViewModel
 
 /**
@@ -53,18 +74,16 @@ fun OpenSourceLicenseScreen(
     dependency: String,
     onUpClick: () -> Unit,
 ) {
-    val context = LocalContext.current
     val license by viewModel.getLicenseDependency(dependency).collectAsState("")
     OpenSourceLicenseScreen(
         dependency = dependency,
         license = license,
         onUpClick = onUpClick,
         onUrlClick = {
-            viewModel.openLinkInBrowser(context, it)
+            viewModel.openLinkInBrowser(it)
         },
         onUrlsFound = {
-            val uris = it.map { uri -> uri.toUri() }
-            viewModel.mayLaunchUrl(*uris.toTypedArray())
+            viewModel.mayLaunchUrl(*it.toTypedArray())
         }
     )
 }
