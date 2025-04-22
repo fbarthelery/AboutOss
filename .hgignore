@@ -55,6 +55,7 @@ maven-eclipse.xml
 # gradle generated files
 build/
 .gradle/
+.kotlin/
 
 # google services keys
 # google-services.json
