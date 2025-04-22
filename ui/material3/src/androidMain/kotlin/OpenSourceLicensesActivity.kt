@@ -22,7 +22,6 @@
 package com.geekorum.aboutoss.ui.material3
 
 import android.app.Activity
-import android.net.Uri
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
@@ -33,9 +32,6 @@ import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
 import com.geekorum.aboutoss.core.gms.GmsLicenseInfoRepository
 import com.geekorum.aboutoss.ui.common.BaseOpensourceLicenseActivity
 import com.geekorum.aboutoss.ui.common.Factory
@@ -67,7 +63,7 @@ open class OpenSourceLicensesActivity : BaseOpensourceLicenseActivity() {
         WindowCompat.setDecorFitsSystemWindows(window, false)
         setContent {
             themeProvider {
-                DependencyNavHost(
+                OpenSourceDependenciesNavHost(
                     openSourceLicensesViewModel = viewModel,
                     navigateUp = {
                         if (!onNavigateUp()) {
@@ -100,31 +96,3 @@ open class OpenSourceLicensesActivity : BaseOpensourceLicenseActivity() {
     }
 }
 
-@Composable
-fun DependencyNavHost(
-    openSourceLicensesViewModel: OpenSourceLicensesViewModel,
-    navigateUp: () -> Unit
-) {
-    val navController = rememberNavController()
-    NavHost(navController, startDestination = "dependencies") {
-        composable("dependencies") {
-            OpenSourceDependenciesListScreen(
-                viewModel = openSourceLicensesViewModel,
-                onDependencyClick = {
-                    navController.navigate("dependency_license/${Uri.encode(it)}")
-                },
-                onUpClick = navigateUp
-            )
-        }
-        composable("dependency_license/{dependency}") {
-            val dependency = requireNotNull(it.arguments?.getString("dependency"))
-            OpenSourceLicenseScreen(
-                viewModel = openSourceLicensesViewModel,
-                dependency = dependency,
-                onUpClick = {
-                    navController.popBackStack()
-                },
-            )
-        }
-    }
-}
