@@ -19,12 +19,15 @@
  * You should have received a copy of the GNU General Public License
  * along with AboutOss.  If not, see <http://www.gnu.org/licenses/>.
  */
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 @Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
 plugins {
     id("com.android.application")
-    id("org.jetbrains.kotlin.android")
+    kotlin("multiplatform")
     id("com.geekorum.build.source-license-checker")
     alias(libs.plugins.org.jetbrains.kotlin.compose.compiler)
+    alias(libs.plugins.org.jetbrains.compose.multiplatform)
     alias(libs.plugins.google.gms.oss.license)
 }
 
@@ -34,6 +37,48 @@ buildscript {
         classpath("com.android.tools.build:gradle:8.9.2")
     }
 }
+
+kotlin {
+    androidTarget {
+        compilerOptions {
+            jvmTarget.set(JvmTarget.JVM_17)
+        }
+    }
+
+    jvm("desktop")
+
+    listOf(
+        iosX64(),
+        iosArm64(),
+        iosSimulatorArm64(),
+    ).forEach { iosTarget ->
+        iosTarget.binaries.framework {
+            baseName = "aboutoss-sample-app"
+            isStatic = true
+        }
+    }
+
+    sourceSets {
+        commonMain.dependencies {
+            implementation(project(":core"))
+            implementation(project(":ui:common"))
+            implementation(project(":ui:material2"))
+            implementation(project(":ui:material3"))
+            implementation(compose.material3)
+            implementation(compose.components.resources)
+            implementation(compose.components.uiToolingPreview)
+        }
+
+        androidMain.dependencies {
+            api(libs.androidx.activity)
+            implementation(dependencies.enforcedPlatform(libs.androidx.compose.bom))
+            implementation(libs.androidx.activity.compose)
+            implementation(libs.geekdroid)
+            implementation(libs.androidx.lifecycle.viewmodel.compose)
+        }
+    }
+}
+
 
 android {
     namespace = "com.geekorum.aboutoss.sampleapp"
@@ -62,12 +107,10 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
-    kotlinOptions {
-        jvmTarget = "1.8"
-    }
+
     buildFeatures {
         compose = true
         buildConfig = true
@@ -80,25 +123,6 @@ android {
 }
 
 dependencies {
-    implementation(project(":core"))
-    implementation(project(":ui:common"))
-    implementation(project(":ui:material2"))
-    implementation(project(":ui:material3"))
-
-    implementation(libs.geekdroid) {
-        //TODO get rid of dagger platform in geekdroid
-        exclude("com.google.dagger", "dagger-platform")
-    }
-
-
-    implementation(libs.androidx.lifecycle.viewmodel)
-    implementation(libs.androidx.lifecycle.viewmodel.compose)
-    implementation(libs.androidx.activity.compose)
-    implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.androidx.compose.ui)
-    implementation(libs.androidx.compose.ui.graphics)
-    implementation(libs.androidx.compose.ui.tooling.preview)
-    implementation(libs.androidx.compose.material3)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)

@@ -29,11 +29,11 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.geekorum.aboutoss.sampleapp.ui.theme.AboutOssTheme
 import com.geekorum.aboutoss.sampleapp.ui.theme.OpenSourceLicenseTheme
 import com.geekorum.aboutoss.ui.material3.OpenSourceLicensesActivity
+import org.jetbrains.compose.ui.tooling.preview.Preview
 import com.geekorum.aboutoss.ui.material.OpenSourceLicensesActivity as Material2OpenSourceLicensesActivity
 
 class MainActivity : ComponentActivity() {
@@ -143,10 +143,12 @@ private fun Material3Card(
 }
 
 
-@Preview(showBackground = true)
+@Preview
 @Composable
 fun LauncherActivitySectionPreview() {
     AboutOssTheme {
-        LaunchActivitySection(onMaterial2Click = {}, onMaterial3Click = {})
+        Surface {
+            LaunchActivitySection(onMaterial2Click = {}, onMaterial3Click = {})
+        }
     }
 }
