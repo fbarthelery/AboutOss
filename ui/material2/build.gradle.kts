@@ -48,7 +48,7 @@ kotlin {
         iosSimulatorArm64(),
     ).forEach { iosTarget ->
         iosTarget.binaries.framework {
-            baseName = "aboutoss-core"
+            baseName = "aboutoss-ui-material"
             isStatic = true
         }
     }
