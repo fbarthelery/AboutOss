@@ -24,7 +24,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application>
         <activity android:name=".OpenSourceLicensesActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:theme="@android:style/Theme.Material.Light.NoActionBar"
             android:label="@string/title_oss_licenses"
             android:exported="false"
             />

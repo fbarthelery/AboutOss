@@ -39,18 +39,19 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import com.geekorum.aboutoss.common.generated.resources.title_oss_licenses
 import com.geekorum.aboutoss.ui.common.OpenSourceLicensesViewModel
-import com.geekorum.aboutoss.ui.common.R as commonR
+import org.jetbrains.compose.resources.stringResource
+import com.geekorum.aboutoss.common.generated.resources.Res as CommonRes
 
 /**
  * Display the list of dependencies used in the application
@@ -98,11 +99,11 @@ fun OpenSourceDependenciesListScreen(
         label = "topBarElevation"
     )
     Scaffold(topBar = {
-        TopAppBar(title = { Text(stringResource(commonR.string.title_oss_licenses)) },
+        TopAppBar(title = { Text(stringResource(CommonRes.string.title_oss_licenses)) },
             navigationIcon = {
                 IconButton(onClick = onUpClick) {
                     Icon(
-                        Icons.Default.ArrowBack,
+                        Icons.AutoMirrored.Filled.ArrowBack,
                         contentDescription = null
                     )
                 }
