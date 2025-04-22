@@ -25,6 +25,8 @@ plugins {
     id("com.android.library")
     kotlin("multiplatform")
     id("com.geekorum.build.source-license-checker")
+    alias(libs.plugins.org.jetbrains.compose.multiplatform)
+    alias(libs.plugins.org.jetbrains.kotlin.compose.compiler)
     `maven-publish`
 }
 
@@ -55,6 +57,8 @@ kotlin {
         commonMain.dependencies {
             implementation(project(":core"))
             api(libs.org.jetbrains.androidx.lifecycle.viewmodel)
+            api(compose.components.resources)
+            implementation(compose.runtime)
         }
 
         androidMain.dependencies {
@@ -62,6 +66,10 @@ kotlin {
             api(libs.geekdroid)
         }
     }
+}
+
+compose.resources {
+    publicResClass = true
 }
 
 android {
