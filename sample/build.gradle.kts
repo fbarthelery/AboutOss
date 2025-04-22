@@ -31,7 +31,7 @@ plugins {
 // workaround bug https://issuetracker.google.com/issues/275534543
 buildscript {
     dependencies {
-        classpath("com.android.tools.build:gradle:8.0.0")
+        classpath("com.android.tools.build:gradle:8.9.2")
     }
 }
 
