@@ -59,10 +59,13 @@ kotlin {
             implementation(project(":core"))
             implementation(compose.material)
             implementation(compose.components.resources)
+            implementation(libs.org.jetbrains.androidx.navigation.compose)
         }
 
         androidMain.dependencies {
             api(libs.androidx.activity)
+            implementation(dependencies.platform(libs.androidx.compose.bom))
+            implementation(libs.androidx.activity.compose)
         }
     }
 }
@@ -110,10 +113,6 @@ android {
 }
 
 dependencies {
-    implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.androidx.activity.compose)
-    implementation(libs.androidx.navigation.compose)
-
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
