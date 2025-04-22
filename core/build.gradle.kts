@@ -4,7 +4,7 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
  * AboutOss is an utility library to retrieve and display
  * opensource licenses in Android applications.
  *
- * Copyright (C) 2023 by Frederic-Charles Barthelery.
+ * Copyright (C) 2023-2025 by Frederic-Charles Barthelery.
  *
  * This file is part of AboutOss.
  *
