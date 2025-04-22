@@ -21,18 +21,9 @@
  */
 package com.geekorum.aboutoss.ui.common
 
-import android.content.Context
-import android.net.Uri
-import androidx.core.net.toUri
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.APPLICATION_KEY
 import androidx.lifecycle.viewModelScope
-import androidx.lifecycle.viewmodel.initializer
-import androidx.lifecycle.viewmodel.viewModelFactory
 import com.geekorum.aboutoss.core.LicenseInfoRepository
-import com.geekorum.aboutoss.core.gms.GmsLicenseInfoRepository
-import com.geekorum.geekdroid.network.BrowserLauncher
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
@@ -41,12 +32,12 @@ import kotlinx.coroutines.flow.stateIn
 /**
  * Manage opensource license information and allow to display them in an UI
  */
-class OpenSourceLicensesViewModel constructor(
+class OpenSourceLicensesViewModel(
     private val licenseInfoRepository: LicenseInfoRepository,
     private val browserLauncher: BrowserLauncher,
 ) : ViewModel() {
     init {
-        browserLauncher.warmUp(null)
+        browserLauncher.warmUp()
     }
 
     private val licensesInfo = flow {
@@ -61,31 +52,15 @@ class OpenSourceLicensesViewModel constructor(
         emit(licenseInfoRepository.getLicenseFor(dependency))
     }
 
-    fun openLinkInBrowser(context: Context, link: String) {
-        browserLauncher.launchUrl(context, link.toUri(),  null as BrowserLauncher.LaunchCustomizer?)
+    fun openLinkInBrowser(link: String) {
+        browserLauncher.launchUrl(link)
     }
 
-    fun mayLaunchUrl(vararg uris: Uri) = browserLauncher.mayLaunchUrl(*uris)
+    fun mayLaunchUrl(vararg uris: String) = browserLauncher.mayLaunchUrl(*uris)
 
     override fun onCleared() {
         browserLauncher.shutdown()
     }
 
-    companion object {
-        val Factory = viewModelFactory {
-            initializer {
-                val application = this[APPLICATION_KEY]!!
-                val licenseInfoRepository = GmsLicenseInfoRepository(
-                    appContext = application,
-                    mainCoroutineDispatcher = Dispatchers.Main,
-                    ioCoroutineDispatcher = Dispatchers.IO
-                )
-                val browserLauncher = BrowserLauncher(application, application.packageManager)
-                OpenSourceLicensesViewModel(
-                    licenseInfoRepository,
-                    browserLauncher
-                )
-            }
-        }
-    }
+    companion object
 }

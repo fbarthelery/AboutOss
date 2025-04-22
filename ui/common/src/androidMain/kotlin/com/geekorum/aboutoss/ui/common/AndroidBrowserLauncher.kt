@@ -21,13 +21,28 @@
  */
 package com.geekorum.aboutoss.ui.common
 
-import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Context
+import androidx.core.net.toUri
+import com.geekorum.geekdroid.network.BrowserLauncher as GeekdroidBrowserLauncher
 
-abstract class BaseOpensourceLicenseActivity : AppCompatActivity() {
-    protected open val viewModel: OpenSourceLicensesViewModel by viewModels(
-        factoryProducer = {
-            OpenSourceLicensesViewModel.Factory
-        }
-    )
+class AndroidBrowserLauncher(
+    private val context: Context,
+    private val delegate: GeekdroidBrowserLauncher
+) : BrowserLauncher {
+    override fun warmUp() {
+        delegate.warmUp(null)
+    }
+
+    override fun launchUrl(link: String) {
+        delegate.launchUrl(context, link.toUri(), null as GeekdroidBrowserLauncher.LaunchCustomizer?)
+    }
+
+    override fun mayLaunchUrl(vararg uris: String) {
+        val asUris = uris.map { it.toUri() }.toTypedArray()
+        delegate.mayLaunchUrl(*asUris)
+    }
+
+    override fun shutdown() {
+        delegate.shutdown()
+    }
 }
