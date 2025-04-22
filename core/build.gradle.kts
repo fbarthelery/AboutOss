@@ -54,8 +54,8 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            implementation(libs.okio)
-            implementation(libs.kotlinx.coroutines)
+            api(libs.okio)
+            api(libs.kotlinx.coroutines)
             implementation(libs.kotlinx.serialization.json)
         }
     }
