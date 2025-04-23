@@ -32,6 +32,7 @@ import com.geekorum.aboutoss.ui.common.OpenSourceLicensesViewModel
 import com.geekorum.aboutoss.ui.material3.OpenSourceLicensesActivity
 import com.geekorum.geekdroid.network.BrowserLauncher
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.IO
 import com.geekorum.aboutoss.ui.material.OpenSourceLicensesActivity as Material2OpenSourceLicensesActivity
 
 /**
@@ -71,7 +72,7 @@ class PrebuiltLicencesMaterial3Activity : OpenSourceLicensesActivity() {
     )
 }
 
-fun CreationExtras.createPrebuildOpenSourceLicensesViewModel(): OpenSourceLicensesViewModel {
+actual fun CreationExtras.createPrebuildOpenSourceLicensesViewModel(): OpenSourceLicensesViewModel {
     val application =
         this[ViewModelProvider.AndroidViewModelFactory.APPLICATION_KEY]!!
     val licenseInfoRepository = GmsLicenseInfoRepository(

@@ -45,7 +45,11 @@ kotlin {
         }
     }
 
-    jvm("desktop")
+    jvm("desktop") {
+        mainRun {
+            mainClass = "com.geekorum.aboutoss.sampleapp.MainKt"
+        }
+    }
 
     listOf(
         iosX64(),
@@ -67,6 +71,7 @@ kotlin {
             implementation(compose.material3)
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
+            implementation(libs.org.jetbrains.androidx.lifecycle.viewmodel.compose)
         }
 
         androidMain.dependencies {
@@ -74,11 +79,16 @@ kotlin {
             implementation(dependencies.enforcedPlatform(libs.androidx.compose.bom))
             implementation(libs.androidx.activity.compose)
             implementation(libs.geekdroid)
-            implementation(libs.androidx.lifecycle.viewmodel.compose)
+        }
+
+        val desktopMain by getting {
+            dependencies {
+                implementation(compose.desktop.currentOs)
+                implementation(libs.kotlinx.coroutines.swing)
+            }
         }
     }
 }
-
 
 android {
     namespace = "com.geekorum.aboutoss.sampleapp"

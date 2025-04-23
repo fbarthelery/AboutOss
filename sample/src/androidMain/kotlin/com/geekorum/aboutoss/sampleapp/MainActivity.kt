@@ -25,15 +25,9 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.*
-import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import com.geekorum.aboutoss.sampleapp.ui.theme.AboutOssTheme
 import com.geekorum.aboutoss.sampleapp.ui.theme.OpenSourceLicenseTheme
 import com.geekorum.aboutoss.ui.material3.OpenSourceLicensesActivity
-import org.jetbrains.compose.ui.tooling.preview.Preview
 import com.geekorum.aboutoss.ui.material.OpenSourceLicensesActivity as Material2OpenSourceLicensesActivity
 
 class MainActivity : ComponentActivity() {
@@ -41,7 +35,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             AboutOssTheme {
-                Sample(
+                SampleApp(
                     onMaterial2Click = {
                         startMaterial2LicenseActivity()
                     },
@@ -77,78 +71,5 @@ class MainActivity : ComponentActivity() {
             Intent(this, OpenSourceLicensesActivity::class.java)
         }
         startActivity(intent)
-    }
-}
-
-@Composable
-private fun Sample(
-    onMaterial2Click: () -> Unit,
-    onMaterial3Click: () -> Unit,
-) {
-    Surface(
-        modifier = Modifier.fillMaxSize(),
-        color = MaterialTheme.colorScheme.background
-    ) {
-        Column(Modifier.fillMaxSize()) {
-            LaunchActivitySection(onMaterial2Click, onMaterial3Click)
-            CustomViewer(modifier = Modifier.padding(horizontal = 16.dp))
-        }
-    }
-}
-
-@Composable
-private fun LaunchActivitySection(
-    onMaterial2Click: () -> Unit,
-    onMaterial3Click: () -> Unit,
-    modifier: Modifier = Modifier
-) {
-    Column(modifier.padding(16.dp)) {
-        Text("This section launch a new activity to display licences information")
-        Row(
-            horizontalArrangement = Arrangement.SpaceAround, modifier = Modifier
-                .fillMaxWidth()
-                .padding(32.dp)
-        ) {
-            Material2Card(onClick = onMaterial2Click)
-            Material3Card(onClick = onMaterial3Click)
-        }
-    }
-}
-
-
-@Composable
-@OptIn(ExperimentalMaterial3Api::class)
-private fun Material2Card(
-    onClick: () -> Unit,
-    modifier: Modifier = Modifier
-) {
-    Card(modifier = modifier, onClick = onClick) {
-        Column(Modifier.padding(16.dp)) {
-            Text("Material2 UI", style = MaterialTheme.typography.labelLarge)
-        }
-    }
-}
-
-@Composable
-@OptIn(ExperimentalMaterial3Api::class)
-private fun Material3Card(
-    onClick: () -> Unit,
-    modifier: Modifier = Modifier
-) {
-    Card(modifier = modifier, onClick = onClick) {
-        Column(Modifier.padding(16.dp)) {
-            Text("Material3 UI", style = MaterialTheme.typography.labelLarge)
-        }
-    }
-}
-
-
-@Preview
-@Composable
-fun LauncherActivitySectionPreview() {
-    AboutOssTheme {
-        Surface {
-            LaunchActivitySection(onMaterial2Click = {}, onMaterial3Click = {})
-        }
     }
 }
