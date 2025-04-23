@@ -21,6 +21,7 @@
  */
 package com.geekorum.aboutoss.core.licensee
 
+import com.geekorum.aboutoss.core.LicenseInfoRepository
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.ExperimentalSerializationApi
@@ -30,16 +31,16 @@ class LicenseeLicenseInfoRepository(
     private val produceInput: suspend () -> Source,
     private val mainCoroutineDispatcher: CoroutineDispatcher,
     private val ioCoroutineDispatcher: CoroutineDispatcher,
-) {
+) : LicenseInfoRepository {
 
     private var licensesInfo: Map<String, String>? = null
 
-    suspend fun getLicensesInfo(): Map<String, String> = withContext(mainCoroutineDispatcher) {
+    override suspend fun getLicensesInfo(): Map<String, String> = withContext(mainCoroutineDispatcher) {
         parseLicenses()
         checkNotNull(licensesInfo)
     }
 
-    suspend fun getLicenseFor(dependency: String): String = withContext(mainCoroutineDispatcher) {
+    override suspend fun getLicenseFor(dependency: String): String = withContext(mainCoroutineDispatcher) {
         parseLicenses()
         checkNotNull(licensesInfo).let {
             return@withContext it[dependency] ?: error("Dependency not found")
