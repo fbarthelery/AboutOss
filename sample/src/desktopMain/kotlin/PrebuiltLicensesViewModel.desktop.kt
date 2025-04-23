@@ -23,7 +23,7 @@ package com.geekorum.aboutoss.sampleapp
 
 import androidx.lifecycle.viewmodel.CreationExtras
 import com.geekorum.aboutoss.core.licensee.LicenseeLicenseInfoRepository
-import com.geekorum.aboutoss.ui.common.BrowserLauncher
+import com.geekorum.aboutoss.ui.common.DesktopBrowserLauncher
 import com.geekorum.aboutoss.ui.common.OpenSourceLicensesViewModel
 import kotlinx.coroutines.Dispatchers
 import org.jetbrains.compose.resources.ExperimentalResourceApi
@@ -38,20 +38,6 @@ actual fun CreationExtras.createPrebuildOpenSourceLicensesViewModel(): OpenSourc
 
     return OpenSourceLicensesViewModel(
         licenseInfoRepository,
-        object : BrowserLauncher {
-            override fun warmUp() {
-            }
-
-            override fun launchUrl(link: String) {
-                TODO("Not yet implemented")
-            }
-
-            override fun mayLaunchUrl(vararg uris: String) {
-                TODO("Not yet implemented")
-            }
-
-            override fun shutdown() {
-            }
-        }
+        DesktopBrowserLauncher()
     )
 }

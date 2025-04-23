@@ -22,6 +22,10 @@
 package com.geekorum.aboutoss.sampleapp
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -29,8 +33,27 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Composable
 @Preview
 fun SampleAppDesktop() {
-    SampleApp(onMaterial2Click = {},
-        onMaterial3Click = {})
+    var material2IsOpen by remember { mutableStateOf(false) }
+    var material3IsOpen by remember { mutableStateOf(false) }
+    SampleApp(
+        onMaterial2Click = {
+            material2IsOpen = true
+        },
+        onMaterial3Click = {
+            material3IsOpen = true
+        })
+
+    if (material2IsOpen) {
+        PrebuiltLicencesMaterial2Window(onCloseRequest = {
+            material2IsOpen = false
+        })
+    }
+    if (material3IsOpen) {
+        PrebuiltLicencesMaterial3Window(onCloseRequest = {
+            material3IsOpen = false
+        })
+    }
+
 }
 
 fun main() = application {
