@@ -34,11 +34,7 @@ import kotlinx.coroutines.flow.stateIn
  */
 class OpenSourceLicensesViewModel(
     private val licenseInfoRepository: LicenseInfoRepository,
-    private val browserLauncher: BrowserLauncher,
 ) : ViewModel() {
-    init {
-        browserLauncher.warmUp()
-    }
 
     private val licensesInfo = flow {
         emit(licenseInfoRepository.getLicensesInfo())
@@ -50,16 +46,6 @@ class OpenSourceLicensesViewModel(
 
     fun getLicenseDependency(dependency: String) = flow {
         emit(licenseInfoRepository.getLicenseFor(dependency))
-    }
-
-    fun openLinkInBrowser(link: String) {
-        browserLauncher.launchUrl(link)
-    }
-
-    fun mayLaunchUrl(vararg uris: String) = browserLauncher.mayLaunchUrl(*uris)
-
-    override fun onCleared() {
-        browserLauncher.shutdown()
     }
 
     companion object

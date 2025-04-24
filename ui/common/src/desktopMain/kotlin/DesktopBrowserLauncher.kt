@@ -21,6 +21,8 @@
  */
 package com.geekorum.aboutoss.ui.common
 
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import java.awt.Desktop
 import java.net.URI
 import java.util.Locale
@@ -38,9 +40,6 @@ class DesktopBrowserLauncher : BrowserLauncher {
     }
 
     private val openCommandLauncher = OpenCommandLauncher()
-
-    override fun warmUp() {
-    }
 
     override fun launchUrl(link: String) {
         try {
@@ -63,8 +62,11 @@ class DesktopBrowserLauncher : BrowserLauncher {
     override fun mayLaunchUrl(vararg uris: String) {
     }
 
-    override fun shutdown() {
-    }
+}
+
+@Composable
+actual fun rememberBrowserLauncher(): BrowserLauncher {
+    return remember { DesktopBrowserLauncher() }
 }
 
 private interface Launcher {

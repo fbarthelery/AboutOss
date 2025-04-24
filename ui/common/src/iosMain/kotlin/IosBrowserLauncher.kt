@@ -21,12 +21,13 @@
  */
 package com.geekorum.aboutoss.ui.common
 
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import platform.Foundation.NSURL.Companion.URLWithString
 import platform.UIKit.UIApplication
 
 
 class IosBrowserLauncher : BrowserLauncher {
-    override fun warmUp() {}
 
     override fun launchUrl(link: String) {
         UIApplication.sharedApplication.openURL(
@@ -37,6 +38,9 @@ class IosBrowserLauncher : BrowserLauncher {
     }
 
     override fun mayLaunchUrl(vararg uris: String) {}
+}
 
-    override fun shutdown() {}
+@Composable
+actual fun rememberBrowserLauncher(): BrowserLauncher {
+    return remember { IosBrowserLauncher() }
 }

@@ -21,16 +21,19 @@
  */
 package com.geekorum.aboutoss.ui.common
 
+import androidx.compose.runtime.Composable
+
 
 /**
  * Interface to be able to launch a browser to display a link
  */
 interface BrowserLauncher {
-    fun warmUp()
 
     fun launchUrl(link: String)
 
     fun mayLaunchUrl(vararg uris: String)
 
-    fun shutdown()
 }
+
+@Composable
+expect fun rememberBrowserLauncher(): BrowserLauncher

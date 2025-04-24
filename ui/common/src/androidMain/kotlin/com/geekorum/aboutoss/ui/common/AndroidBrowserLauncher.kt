@@ -21,20 +21,25 @@
  */
 package com.geekorum.aboutoss.ui.common
 
+import android.app.Activity
 import android.content.Context
+import androidx.activity.compose.LocalActivity
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.remember
 import androidx.core.net.toUri
 import com.geekorum.geekdroid.network.BrowserLauncher as GeekdroidBrowserLauncher
 
 class AndroidBrowserLauncher(
-    private val context: Context,
+    private val activity: Activity,
     private val delegate: GeekdroidBrowserLauncher
 ) : BrowserLauncher {
-    override fun warmUp() {
+    fun warmUp() {
         delegate.warmUp(null)
     }
 
     override fun launchUrl(link: String) {
-        delegate.launchUrl(context, link.toUri(), null as GeekdroidBrowserLauncher.LaunchCustomizer?)
+        delegate.launchUrl(activity, link.toUri(), null as GeekdroidBrowserLauncher.LaunchCustomizer?)
     }
 
     override fun mayLaunchUrl(vararg uris: String) {
@@ -42,7 +47,25 @@ class AndroidBrowserLauncher(
         delegate.mayLaunchUrl(*asUris)
     }
 
-    override fun shutdown() {
+    fun shutdown() {
         delegate.shutdown()
     }
+}
+
+@Composable
+actual fun rememberBrowserLauncher(): BrowserLauncher {
+    val activity = checkNotNull(LocalActivity.current)
+    val result = remember(activity) {
+        val application = activity.application
+        val delegate =
+            GeekdroidBrowserLauncher(application, application.packageManager)
+        AndroidBrowserLauncher(activity, delegate)
+    }
+    DisposableEffect(result) {
+        result.warmUp()
+        onDispose {
+            result.shutdown()
+        }
+    }
+    return result
 }

@@ -63,6 +63,7 @@ kotlin {
 
         androidMain.dependencies {
             api(libs.androidx.activity)
+            implementation(libs.androidx.activity.compose)
             api(libs.geekdroid)
         }
     }

@@ -28,10 +28,6 @@ import com.geekorum.aboutoss.core.LicenseInfoRepository
 
 fun OpenSourceLicensesViewModel.Companion.Factory(licenseInfoRepository: LicenseInfoRepository) = viewModelFactory {
     initializer {
-        val browserLauncher = DesktopBrowserLauncher()
-        OpenSourceLicensesViewModel(
-            licenseInfoRepository,
-            browserLauncher
-        )
+        OpenSourceLicensesViewModel(licenseInfoRepository)
     }
 }

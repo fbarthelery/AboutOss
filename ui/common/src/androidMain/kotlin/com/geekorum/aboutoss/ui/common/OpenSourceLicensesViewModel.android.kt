@@ -25,17 +25,12 @@ import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.AP
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.geekorum.aboutoss.core.LicenseInfoRepository
-import com.geekorum.geekdroid.network.BrowserLauncher as GeekdroidBrowserLauncher
 
 
 fun OpenSourceLicensesViewModel.Companion.Factory(licenseInfoRepository: LicenseInfoRepository) = viewModelFactory {
     initializer {
-        val application = this[APPLICATION_KEY]!!
-        val geekdroidBrowserLauncher = GeekdroidBrowserLauncher(application, application.packageManager)
-        val browserLauncher = AndroidBrowserLauncher(application, geekdroidBrowserLauncher)
         OpenSourceLicensesViewModel(
             licenseInfoRepository,
-            browserLauncher
         )
     }
 }
