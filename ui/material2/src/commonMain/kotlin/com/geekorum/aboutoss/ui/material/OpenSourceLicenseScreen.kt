@@ -57,7 +57,9 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.withAnnotation
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
+import com.geekorum.aboutoss.ui.common.BrowserLauncher
 import com.geekorum.aboutoss.ui.common.OpenSourceLicensesViewModel
+import com.geekorum.aboutoss.ui.common.rememberBrowserLauncher
 
 /**
  * Display the opensource license of a dependency
@@ -71,6 +73,7 @@ fun OpenSourceLicenseScreen(
     viewModel: OpenSourceLicensesViewModel,
     dependency: String,
     onUpClick: () -> Unit,
+    browserLauncher: BrowserLauncher = rememberBrowserLauncher()
 ) {
     val license by viewModel.getLicenseDependency(dependency).collectAsState("")
     OpenSourceLicenseScreen(
@@ -78,10 +81,10 @@ fun OpenSourceLicenseScreen(
         license = license,
         onUpClick = onUpClick,
         onUrlClick = {
-            viewModel.openLinkInBrowser(it)
+            browserLauncher.launchUrl(it)
         },
         onUrlsFound = {
-            viewModel.mayLaunchUrl(*it.toTypedArray())
+            browserLauncher.mayLaunchUrl(*it.toTypedArray())
         }
     )
 }
