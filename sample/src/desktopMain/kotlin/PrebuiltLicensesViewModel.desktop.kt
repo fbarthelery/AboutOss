@@ -23,7 +23,6 @@ package com.geekorum.aboutoss.sampleapp
 
 import androidx.lifecycle.viewmodel.CreationExtras
 import com.geekorum.aboutoss.core.licensee.LicenseeLicenseInfoRepository
-import com.geekorum.aboutoss.ui.common.DesktopBrowserLauncher
 import com.geekorum.aboutoss.ui.common.OpenSourceLicensesViewModel
 import kotlinx.coroutines.Dispatchers
 import org.jetbrains.compose.resources.ExperimentalResourceApi
@@ -36,8 +35,5 @@ actual fun CreationExtras.createPrebuildOpenSourceLicensesViewModel(): OpenSourc
         licenseeResourcePath = "app/cash/licensee/prebuilt_artifacts.json",
     )
 
-    return OpenSourceLicensesViewModel(
-        licenseInfoRepository,
-        DesktopBrowserLauncher()
-    )
+    return OpenSourceLicensesViewModel(licenseInfoRepository)
 }
