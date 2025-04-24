@@ -58,6 +58,7 @@ kotlin {
             api(project(":ui:common"))
             implementation(project(":core"))
             implementation(compose.material3)
+            implementation(libs.org.jetbrains.compose.material.icons.core)
             implementation(compose.components.resources)
             implementation(libs.org.jetbrains.androidx.navigation.compose)
         }
