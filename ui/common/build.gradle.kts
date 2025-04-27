@@ -65,7 +65,6 @@ kotlin {
         androidMain.dependencies {
             api(libs.androidx.activity)
             implementation(libs.androidx.activity.compose)
-            api(libs.geekdroid)
         }
     }
 }
@@ -116,6 +115,9 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
+    "androidMainApi"(libs.geekdroid) {
+        exclude("androidx.compose.material3")
+    }
 }
 
 publishing {
