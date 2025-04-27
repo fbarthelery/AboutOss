@@ -24,7 +24,10 @@ package com.geekorum.aboutoss.ui.material
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.darkColors
+import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
 import com.geekorum.aboutoss.core.gms.GmsLicenseInfoRepository
 import com.geekorum.aboutoss.ui.common.BaseOpensourceLicenseActivity
@@ -74,7 +77,8 @@ open class OpenSourceLicensesActivity : BaseOpensourceLicenseActivity() {
          * Default to base material theme [MaterialTheme]
          */
         var themeProvider: @Composable (@Composable () -> Unit) -> Unit = { content ->
-            MaterialTheme(content = content)
+            val colors = if (isSystemInDarkTheme()) darkColors() else lightColors()
+            MaterialTheme(colors = colors, content = content)
         }
     }
 }

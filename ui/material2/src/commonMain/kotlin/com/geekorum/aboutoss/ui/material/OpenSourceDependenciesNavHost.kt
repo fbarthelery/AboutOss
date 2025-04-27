@@ -26,6 +26,7 @@ import androidx.core.uri.UriUtils
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.savedstate.read
 import com.geekorum.aboutoss.ui.common.OpenSourceLicensesViewModel
 
 @Composable
@@ -45,7 +46,9 @@ fun OpenSourceDependenciesNavHost(
             )
         }
         composable("dependency_license/{dependency}") {
-            val dependency = requireNotNull(it.arguments?.getString("dependency"))
+            val dependency = requireNotNull(it.arguments?.read {
+                getString("dependency")
+            })
             OpenSourceLicenseScreen(
                 viewModel = openSourceLicensesViewModel,
                 dependency = dependency,

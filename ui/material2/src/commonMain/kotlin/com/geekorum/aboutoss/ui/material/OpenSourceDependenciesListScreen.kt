@@ -110,8 +110,8 @@ fun OpenSourceDependenciesListScreen(
             },
             elevation = topBarElevation
         )
-    }) {
-        LazyColumn(Modifier.fillMaxSize(), state = lazyListState, contentPadding = it) {
+    }) { contentPadding ->
+        LazyColumn(Modifier.fillMaxSize(), state = lazyListState, contentPadding = contentPadding) {
             items(dependencies) {
                 Column {
                     ListItem(
