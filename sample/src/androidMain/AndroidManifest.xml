@@ -24,6 +24,12 @@
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <queries>
+        <intent>
+            <action android:name="android.support.customtabs.action.CustomTabsService" />
+        </intent>
+    </queries>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -44,11 +50,11 @@
         </activity>
 
         <activity android:name=".PrebuiltLicencesMaterial2Activity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:theme="@android:style/Theme.Material.Light.NoActionBar"
             android:exported="false" />
 
         <activity android:name=".PrebuiltLicencesMaterial3Activity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:theme="@android:style/Theme.Material.Light.NoActionBar"
             android:exported="false" />
 
     </application>
