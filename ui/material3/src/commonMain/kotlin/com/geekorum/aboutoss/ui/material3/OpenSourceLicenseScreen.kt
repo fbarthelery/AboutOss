@@ -21,7 +21,6 @@
  */
 package com.geekorum.aboutoss.ui.material3
 
-import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
@@ -29,7 +28,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -43,20 +42,18 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
-import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.ExperimentalTextApi
+import androidx.compose.ui.text.LinkAnnotation
+import androidx.compose.ui.text.LinkInteractionListener
 import androidx.compose.ui.text.SpanStyle
-import androidx.compose.ui.text.TextLayoutResult
-import androidx.compose.ui.text.UrlAnnotation
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.text.withAnnotation
+import androidx.compose.ui.text.withLink
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import com.geekorum.aboutoss.ui.common.BrowserLauncher
@@ -109,10 +106,12 @@ fun OpenSourceLicenseScreen(
     onUrlClick: (String) -> Unit,
     onUrlsFound: (List<String>) -> Unit,
 ) {
-    val linkifiedLicense = linkifyText(text = license)
+    val linkifiedLicense = linkifyText(text = license, onUrlClick = onUrlClick)
     LaunchedEffect(linkifiedLicense) {
         val uris =
-            linkifiedLicense.getUrlAnnotations(0, linkifiedLicense.length).map { it.item.url }
+            linkifiedLicense.getLinkAnnotations(0, linkifiedLicense.length).map { it.item }
+                .filterIsInstance<LinkAnnotation.Url>()
+                .map { it.url }
         onUrlsFound(uris)
     }
 
@@ -126,38 +125,20 @@ fun OpenSourceLicenseScreen(
             navigationIcon = {
                 IconButton(onClick = onUpClick) {
                     Icon(
-                        Icons.Default.ArrowBack,
+                        Icons.AutoMirrored.Filled.ArrowBack,
                         contentDescription = null
                     )
                 }
             },
         )
     }) { paddingValues ->
-        val layoutResult = remember { mutableStateOf<TextLayoutResult?>(null) }
-        val pressIndicator = Modifier.pointerInput(layoutResult, linkifiedLicense) {
-            detectTapGestures { pos ->
-                layoutResult.value?.let { layoutResult ->
-                    val posWithScroll = pos.copy(y = pos.y + scrollState.value)
-                    val offset = layoutResult.getOffsetForPosition(posWithScroll)
-                    linkifiedLicense.getUrlAnnotations(start = offset, end = offset)
-                        .firstOrNull()?.let { annotation ->
-                            onUrlClick(annotation.item.url)
-                        }
-                }
-            }
-        }
-
         Text(linkifiedLicense,
             modifier = Modifier
                 .padding(paddingValues)
                 .consumeWindowInsets(paddingValues)
                 .padding(horizontal = 16.dp)
                 .fillMaxSize()
-                .then(pressIndicator)
-                .verticalScroll(scrollState),
-            onTextLayout = {
-                layoutResult.value = it
-            }
+                .verticalScroll(scrollState)
         )
     }
 }
@@ -169,7 +150,7 @@ private val urlRegexp = """https?://(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{
 
 @OptIn(ExperimentalTextApi::class)
 @Composable
-internal fun linkifyText(text: String): AnnotatedString {
+internal fun linkifyText(text: String, onUrlClick: (String) -> Unit): AnnotatedString {
     val style = SpanStyle(
         color = MaterialTheme.colorScheme.primary,
         textDecoration = TextDecoration.Underline
@@ -182,7 +163,17 @@ internal fun linkifyText(text: String): AnnotatedString {
                     append(text.substring(currentIdx, match.range.first))
                 }
                 val url = text.substring(match.range)
-                withAnnotation(UrlAnnotation(url)) {
+                val linkInteractionListener = LinkInteractionListener {
+                    val url = when(it) {
+                        is LinkAnnotation.Url -> it.url
+                        is LinkAnnotation.Clickable -> it.tag
+                        else -> null
+                    }
+                    if (url != null) {
+                        onUrlClick(url)
+                    }
+                }
+                withLink(LinkAnnotation.Url(url, linkInteractionListener = linkInteractionListener)) {
                     withStyle(style) {
                         append(url)
                     }

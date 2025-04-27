@@ -23,7 +23,6 @@ package com.geekorum.aboutoss.ui.material3
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
@@ -76,9 +75,7 @@ import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.backhandler.BackHandler
 import androidx.compose.ui.input.nestedscroll.nestedScroll
-import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.text.ExperimentalTextApi
-import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -321,7 +318,7 @@ private fun OpenSourceLicensePane(
     onUrlClick: (String) -> Unit,
     onUrlsFound: (List<String>) -> Unit,
 ) {
-    val linkifiedLicense = linkifyText(text = license)
+    val linkifiedLicense = linkifyText(text = license, onUrlClick = onUrlClick)
     LaunchedEffect(linkifiedLicense) {
         val uris =
             linkifiedLicense.getUrlAnnotations(0, linkifiedLicense.length).map { it.item.url }
@@ -349,20 +346,6 @@ private fun OpenSourceLicensePane(
                 )
             }
         ) { paddingValues ->
-            val layoutResult = remember { mutableStateOf<TextLayoutResult?>(null) }
-            val pressIndicator = Modifier.pointerInput(layoutResult, linkifiedLicense) {
-                detectTapGestures { pos ->
-                    layoutResult.value?.let { layoutResult ->
-                        val posWithScroll = pos.copy(y = pos.y + scrollState.value)
-                        val offset = layoutResult.getOffsetForPosition(posWithScroll)
-                        linkifiedLicense.getUrlAnnotations(start = offset, end = offset)
-                            .firstOrNull()?.let { annotation ->
-                                onUrlClick(annotation.item.url)
-                            }
-                    }
-                }
-            }
-
             Text(
                 linkifiedLicense,
                 modifier = Modifier
@@ -370,11 +353,7 @@ private fun OpenSourceLicensePane(
                     .consumeWindowInsets(paddingValues)
                     .padding(horizontal = 16.dp)
                     .fillMaxSize()
-                    .then(pressIndicator)
-                    .verticalScroll(scrollState),
-                onTextLayout = {
-                    layoutResult.value = it
-                }
+                    .verticalScroll(scrollState)
             )
         }
     }
