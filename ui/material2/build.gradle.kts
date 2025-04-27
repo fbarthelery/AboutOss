@@ -61,6 +61,7 @@ kotlin {
             implementation(compose.components.resources)
             implementation(libs.org.jetbrains.compose.material.icons.core)
             implementation(libs.org.jetbrains.androidx.navigation.compose)
+            implementation(libs.org.jetbrains.androidx.core.uri)
         }
 
         androidMain.dependencies {

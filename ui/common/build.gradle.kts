@@ -56,6 +56,7 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             implementation(project(":core"))
+            api(libs.org.jetbrains.androidx.lifecycle.runtime.compose)
             api(libs.org.jetbrains.androidx.lifecycle.viewmodel)
             api(compose.components.resources)
             implementation(compose.runtime)

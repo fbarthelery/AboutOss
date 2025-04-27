@@ -60,13 +60,18 @@ kotlin {
             implementation(compose.material3)
             implementation(libs.org.jetbrains.compose.material.icons.core)
             implementation(compose.components.resources)
+            implementation(compose.components.uiToolingPreview)
             implementation(libs.org.jetbrains.androidx.navigation.compose)
+            implementation(libs.org.jetbrains.androidx.core.uri)
+            implementation(libs.org.jetbrains.androidx.compose.material3.adaptive.navigation)
+            implementation(libs.org.jetbrains.compose.ui.backhandler)
         }
 
         androidMain.dependencies {
             api(libs.androidx.activity)
             implementation(dependencies.platform(libs.androidx.compose.bom))
             implementation(libs.androidx.activity.compose)
+            implementation(libs.androidx.compose.ui.tooling)
         }
     }
 }

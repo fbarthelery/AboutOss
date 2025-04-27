@@ -21,7 +21,7 @@
 [versions]
 android-gradle-plugin = "8.9.2"
 org-jetbrains-kotlin = "2.1.20"
-org-jetbrains-compose-multiplatform = "1.7.3"
+org-jetbrains-compose-multiplatform = "1.8.0-rc01" # rc for adaptive
 junit = "4.13.2"
 androidx-test-ext-junit = "1.2.1"
 espresso-core = "3.6.1"
@@ -31,11 +31,14 @@ kotlinx-coroutines = "1.10.2"
 kotlinx-serialization = "1.8.1"
 androidx-activity = "1.10.1"
 androidx-navigation = "2.8.9"
-androidx-compose-bom = "2025.04.00"
+androidx-compose-bom = "2025.04.01"
 androidx-lifecycle = "2.8.7"
-org-jetbrains-androidx-lifecycle = "2.8.4"
-org-jetbrains-androidx-navigation = "2.8.0-alpha11"
+org-jetbrains-androidx-lifecycle = "2.9.0-alpha07"
+org-jetbrains-androidx-core-uri = "1.1.0-alpha03"
+org-jetbrains-androidx-navigation = "2.9.0-alpha17"
+org-jetbrains-androidx-compose-material3-adaptive-navigation = "1.1.0-rc01"
 org-jetbrains-compose-material-icons-core = "1.7.3"
+org-jetbrains-compose-ui = "1.8.0-rc01"
 geekdroid = "geekttrss-1.6.7"
 
 
@@ -52,6 +55,7 @@ geekdroid = { module = "com.geekorum.geekdroid:geekdroid", version.ref = "geekdr
 
 androidx-lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref="androidx-lifecycle" }
 androidx-lifecycle-viewmodel-compose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "androidx-lifecycle" }
+org-jetbrains-androidx-lifecycle-runtime-compose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose", version.ref = "org-jetbrains-androidx-lifecycle" }
 org-jetbrains-androidx-lifecycle-viewmodel = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel", version.ref = "org-jetbrains-androidx-lifecycle" }
 org-jetbrains-androidx-lifecycle-viewmodel-compose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "org-jetbrains-androidx-lifecycle" }
 androidx-activity = { module = "androidx.activity:activity-ktx", version.ref="androidx-activity" }
@@ -65,6 +69,9 @@ androidx-compose-material = { module = "androidx.compose.material:material" }
 androidx-compose-material-icons-core = { module = "androidx.compose.material:material-icons-core" }
 org-jetbrains-compose-material-icons-core = { module = "org.jetbrains.compose.material:material-icons-core", version.ref = "org-jetbrains-compose-material-icons-core" }
 androidx-compose-material3 = { module = "androidx.compose.material3:material3" }
+org-jetbrains-androidx-compose-material3-adaptive-navigation = { module = "org.jetbrains.compose.material3.adaptive:adaptive-navigation", version.ref = "org-jetbrains-androidx-compose-material3-adaptive-navigation" }
+org-jetbrains-compose-ui-backhandler = { module = "org.jetbrains.compose.ui:ui-backhandler", version.ref = "org-jetbrains-compose-ui"}
+
 androidx-compose-ui = { group = "androidx.compose.ui", name = "ui" }
 androidx-compose-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
 androidx-compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
@@ -73,6 +80,8 @@ androidx-compose-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-
 androidx-compose-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
+
+org-jetbrains-androidx-core-uri = { module = "org.jetbrains.androidx.core:core-uri", version.ref = "org-jetbrains-androidx-core-uri" }
 
 
 [plugins]
