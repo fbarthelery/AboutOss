@@ -169,7 +169,7 @@ private val urlRegexp = """https?://(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{
 
 @OptIn(ExperimentalTextApi::class)
 @Composable
-private fun linkifyText(text: String): AnnotatedString {
+internal fun linkifyText(text: String): AnnotatedString {
     val style = SpanStyle(
         color = MaterialTheme.colorScheme.primary,
         textDecoration = TextDecoration.Underline
