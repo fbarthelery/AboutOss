@@ -26,6 +26,7 @@ plugins {
     kotlin("multiplatform")
     alias(libs.plugins.org.jetbrains.kotlin.compose.compiler)
     alias(libs.plugins.org.jetbrains.compose.multiplatform)
+    alias(libs.plugins.org.jetbrains.kotlinx.serialization)
     id("com.geekorum.build.source-license-checker")
     `maven-publish`
 }
@@ -62,9 +63,9 @@ kotlin {
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
             implementation(libs.org.jetbrains.androidx.navigation.compose)
-            implementation(libs.org.jetbrains.androidx.core.uri)
             implementation(libs.org.jetbrains.androidx.compose.material3.adaptive.navigation)
             implementation(libs.org.jetbrains.compose.ui.backhandler)
+            implementation(libs.org.jetbrains.androidx.lifecycle.viewmodel.compose)
         }
 
         androidMain.dependencies {

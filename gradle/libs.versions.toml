@@ -34,7 +34,6 @@ androidx-navigation = "2.8.9"
 androidx-compose-bom = "2025.04.01"
 androidx-lifecycle = "2.8.7"
 org-jetbrains-androidx-lifecycle = "2.9.0-alpha07"
-org-jetbrains-androidx-core-uri = "1.1.0-alpha03"
 org-jetbrains-androidx-navigation = "2.9.0-alpha17"
 org-jetbrains-androidx-compose-material3-adaptive-navigation = "1.1.0-rc01"
 org-jetbrains-compose-material-icons-core = "1.7.3"
@@ -80,8 +79,6 @@ androidx-compose-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-
 androidx-compose-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
-
-org-jetbrains-androidx-core-uri = { module = "org.jetbrains.androidx.core:core-uri", version.ref = "org-jetbrains-androidx-core-uri" }
 
 
 [plugins]
