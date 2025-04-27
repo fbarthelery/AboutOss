@@ -26,6 +26,7 @@ plugins {
     kotlin("multiplatform")
     alias(libs.plugins.org.jetbrains.kotlin.compose.compiler)
     alias(libs.plugins.org.jetbrains.compose.multiplatform)
+    alias(libs.plugins.org.jetbrains.kotlinx.serialization)
     id("com.geekorum.build.source-license-checker")
     `maven-publish`
 }
@@ -61,7 +62,6 @@ kotlin {
             implementation(compose.components.resources)
             implementation(libs.org.jetbrains.compose.material.icons.core)
             implementation(libs.org.jetbrains.androidx.navigation.compose)
-            implementation(libs.org.jetbrains.androidx.core.uri)
             implementation(libs.org.jetbrains.androidx.lifecycle.viewmodel.compose)
         }
 

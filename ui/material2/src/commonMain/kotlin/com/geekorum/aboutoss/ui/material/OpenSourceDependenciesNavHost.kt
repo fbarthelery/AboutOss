@@ -22,12 +22,20 @@
 package com.geekorum.aboutoss.ui.material
 
 import androidx.compose.runtime.Composable
-import androidx.core.uri.UriUtils
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import androidx.savedstate.read
+import androidx.navigation.toRoute
 import com.geekorum.aboutoss.ui.common.OpenSourceLicensesViewModel
+import kotlinx.serialization.Serializable
+
+@Serializable
+private object DependenciesList
+
+@Serializable
+private data class DependencyLicense(
+    val dependency: String
+)
 
 @Composable
 fun OpenSourceDependenciesNavHost(
@@ -35,20 +43,19 @@ fun OpenSourceDependenciesNavHost(
     navigateUp: () -> Unit
 ) {
     val navController = rememberNavController()
-    NavHost(navController, startDestination = "dependencies") {
-        composable("dependencies") {
+    NavHost(navController, startDestination = DependenciesList) {
+        composable<DependenciesList> {
             OpenSourceDependenciesListScreen(
                 viewModel = openSourceLicensesViewModel,
                 onDependencyClick = {
-                    navController.navigate("dependency_license/${UriUtils.encode(it)}")
+                    navController.navigate(DependencyLicense(it))
                 },
                 onUpClick = navigateUp
             )
         }
-        composable("dependency_license/{dependency}") {
-            val dependency = requireNotNull(it.arguments?.read {
-                getString("dependency")
-            })
+        composable<DependencyLicense> {
+            val route = it.toRoute<DependencyLicense>()
+            val dependency = route.dependency
             OpenSourceLicenseScreen(
                 viewModel = openSourceLicensesViewModel,
                 dependency = dependency,
