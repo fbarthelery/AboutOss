@@ -61,7 +61,7 @@ open class OpenSourceLicensesActivity : BaseOpensourceLicenseActivity() {
         enableEdgeToEdge()
         setContent {
             themeProvider {
-                OpenSourceDependenciesNavHost(
+                AdaptiveOpenSourceDependenciesScreen(
                     openSourceLicensesViewModel = viewModel,
                     navigateUp = {
                         if (!onNavigateUp()) {

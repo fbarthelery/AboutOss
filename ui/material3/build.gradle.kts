@@ -72,7 +72,6 @@ kotlin {
             api(libs.androidx.activity)
             implementation(dependencies.platform(libs.androidx.compose.bom))
             implementation(libs.androidx.activity.compose)
-            implementation(libs.androidx.compose.ui.tooling)
         }
     }
 }
@@ -123,6 +122,9 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
+    afterEvaluate {
+        "androidDebugImplementation"(libs.androidx.compose.ui.tooling)
+    }
 }
 
 publishing {

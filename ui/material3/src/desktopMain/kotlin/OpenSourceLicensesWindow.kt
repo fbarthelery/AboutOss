@@ -54,7 +54,7 @@ fun OpenSourceLicensesWindow(
 ) {
     val title = stringResource(Res.string.title_oss_licenses)
     Window(onCloseRequest = onCloseRequest, state = state, title = title) {
-        OpenSourceDependenciesNavHost(
+        AdaptiveOpenSourceDependenciesScreen(
             openSourceLicensesViewModel = viewModel,
             navigateUp = {
                 onCloseRequest()
