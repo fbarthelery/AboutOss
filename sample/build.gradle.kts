@@ -28,6 +28,7 @@ plugins {
     id("com.geekorum.build.source-license-checker")
     alias(libs.plugins.org.jetbrains.kotlin.compose.compiler)
     alias(libs.plugins.org.jetbrains.compose.multiplatform)
+    alias(libs.plugins.org.jetbrains.kotlinx.serialization)
     alias(libs.plugins.google.gms.oss.license)
 }
 
