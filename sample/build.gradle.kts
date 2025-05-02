@@ -26,9 +26,9 @@ plugins {
     id("com.android.application")
     kotlin("multiplatform")
     id("com.geekorum.build.source-license-checker")
-    alias(libs.plugins.org.jetbrains.kotlin.compose.compiler)
-    alias(libs.plugins.org.jetbrains.compose.multiplatform)
-    alias(libs.plugins.org.jetbrains.kotlinx.serialization)
+    alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.jetbrains.compose.multiplatform)
+    alias(libs.plugins.kotlinx.serialization)
     alias(libs.plugins.google.gms.oss.license)
 }
 
@@ -72,7 +72,7 @@ kotlin {
             implementation(compose.material3)
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
-            implementation(libs.org.jetbrains.androidx.lifecycle.viewmodel.compose)
+            implementation(libs.jetbrains.androidx.lifecycle.viewModelCompose)
         }
 
         androidMain.dependencies {
@@ -138,7 +138,7 @@ dependencies {
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
-    androidTestImplementation(libs.androidx.compose.ui.test.junit4)
-    debugImplementation(libs.androidx.compose.ui.tooling)
-    debugImplementation(libs.androidx.compose.ui.test.manifest)
+    androidTestImplementation(libs.androidx.compose.uiTestJunit4)
+    debugImplementation(libs.androidx.compose.uiTooling)
+    debugImplementation(libs.androidx.compose.uiTestManifest)
 }

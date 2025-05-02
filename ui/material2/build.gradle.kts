@@ -24,9 +24,9 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 plugins {
     id("com.android.library")
     kotlin("multiplatform")
-    alias(libs.plugins.org.jetbrains.kotlin.compose.compiler)
-    alias(libs.plugins.org.jetbrains.compose.multiplatform)
-    alias(libs.plugins.org.jetbrains.kotlinx.serialization)
+    alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.jetbrains.compose.multiplatform)
+    alias(libs.plugins.kotlinx.serialization)
     id("com.geekorum.build.source-license-checker")
     id("com.geekorum.build.maven-publish")
 }
@@ -60,9 +60,9 @@ kotlin {
             implementation(project(":core"))
             implementation(compose.material)
             implementation(compose.components.resources)
-            implementation(libs.org.jetbrains.compose.material.icons.core)
-            implementation(libs.org.jetbrains.androidx.navigation.compose)
-            implementation(libs.org.jetbrains.androidx.lifecycle.viewmodel.compose)
+            implementation(libs.jetbrains.compose.materialIconsCore)
+            implementation(libs.jetbrains.androidx.navigation.compose)
+            implementation(libs.jetbrains.androidx.lifecycle.viewModelCompose)
         }
 
         androidMain.dependencies {

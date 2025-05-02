@@ -20,8 +20,8 @@
 
 [versions]
 android-gradle-plugin = "8.9.2"
-org-jetbrains-kotlin = "2.1.20"
-org-jetbrains-compose-multiplatform = "1.8.0-rc01" # rc for adaptive
+kotlin = "2.1.20"
+jetbrains-compose-multiplatform = "1.8.0-rc01" # rc for adaptive
 junit = "4.13.2"
 androidx-test-ext-junit = "1.2.1"
 espresso-core = "3.6.1"
@@ -32,12 +32,11 @@ kotlinx-serialization = "1.8.1"
 androidx-activity = "1.10.1"
 androidx-navigation = "2.8.9"
 androidx-compose-bom = "2025.04.01"
-androidx-lifecycle = "2.8.7"
-org-jetbrains-androidx-lifecycle = "2.9.0-alpha07"
-org-jetbrains-androidx-navigation = "2.9.0-alpha17"
-org-jetbrains-androidx-compose-material3-adaptive-navigation = "1.1.0-rc01"
-org-jetbrains-compose-material-icons-core = "1.7.3"
-org-jetbrains-compose-ui = "1.8.0-rc01"
+jetbrains-androidx-lifecycle = "2.9.0-alpha07"
+jetbrains-androidx-navigation = "2.9.0-alpha17"
+jetbrains-compose-material3AdaptiveNavigation = "1.1.0-rc01"
+jetbrains-compose-materialIconsCore = "1.7.3"
+jetbrains-compose-ui = "1.8.0-rc01"
 geekdroid = "geekttrss-1.6.7"
 
 
@@ -46,50 +45,42 @@ junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-test-ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "androidx-test-ext-junit" }
 espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso-core" }
 
-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 okio = { module = "com.squareup.okio:okio", version.ref = "okio"}
 kotlinx-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinx-coroutines"}
 kotlinx-coroutines-swing = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-swing", version.ref = "kotlinx-coroutines"}
 geekdroid = { module = "com.geekorum.geekdroid:geekdroid", version.ref = "geekdroid" }
 
-androidx-lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref="androidx-lifecycle" }
-androidx-lifecycle-viewmodel-compose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "androidx-lifecycle" }
-org-jetbrains-androidx-lifecycle-runtime-compose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose", version.ref = "org-jetbrains-androidx-lifecycle" }
-org-jetbrains-androidx-lifecycle-viewmodel = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel", version.ref = "org-jetbrains-androidx-lifecycle" }
-org-jetbrains-androidx-lifecycle-viewmodel-compose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "org-jetbrains-androidx-lifecycle" }
+jetbrains-androidx-lifecycle-runtimeCompose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose", version.ref = "jetbrains-androidx-lifecycle" }
+jetbrains-androidx-lifecycle-viewmodel= { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel", version.ref = "jetbrains-androidx-lifecycle" }
+jetbrains-androidx-lifecycle-viewModelCompose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "jetbrains-androidx-lifecycle" }
 androidx-activity = { module = "androidx.activity:activity-ktx", version.ref="androidx-activity" }
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref="androidx-activity" }
 
 androidx-compose-bom = { module = "androidx.compose:compose-bom", version.ref = "androidx-compose-bom" }
 androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref="androidx-navigation" }
-org-jetbrains-androidx-navigation-compose = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "org-jetbrains-androidx-navigation" }
+jetbrains-androidx-navigation-compose = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "jetbrains-androidx-navigation" }
 
-androidx-compose-material = { module = "androidx.compose.material:material" }
-androidx-compose-material-icons-core = { module = "androidx.compose.material:material-icons-core" }
-org-jetbrains-compose-material-icons-core = { module = "org.jetbrains.compose.material:material-icons-core", version.ref = "org-jetbrains-compose-material-icons-core" }
-androidx-compose-material3 = { module = "androidx.compose.material3:material3" }
-org-jetbrains-androidx-compose-material3-adaptive-navigation = { module = "org.jetbrains.compose.material3.adaptive:adaptive-navigation", version.ref = "org-jetbrains-androidx-compose-material3-adaptive-navigation" }
-org-jetbrains-compose-ui-backhandler = { module = "org.jetbrains.compose.ui:ui-backhandler", version.ref = "org-jetbrains-compose-ui"}
+jetbrains-compose-materialIconsCore = { module = "org.jetbrains.compose.material:material-icons-core", version.ref = "jetbrains-compose-materialIconsCore" }
+jetbrains-compose-material3AdaptiveNavigation = { module = "org.jetbrains.compose.material3.adaptive:adaptive-navigation", version.ref = "jetbrains-compose-material3AdaptiveNavigation" }
+jetbrains-compose-uiBackhandler = { module = "org.jetbrains.compose.ui:ui-backhandler", version.ref = "jetbrains-compose-ui" }
 
-androidx-compose-ui = { group = "androidx.compose.ui", name = "ui" }
-androidx-compose-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
-androidx-compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
-androidx-compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
-androidx-compose-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
-androidx-compose-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
+androidx-compose-uiTooling = { group = "androidx.compose.ui", name = "ui-tooling" }
+androidx-compose-uiToolingPreview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
+androidx-compose-uiTestManifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
+androidx-compose-uiTestJunit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
 
 
 [plugins]
-com-android-application = { id = "com.android.application", version.ref = "android-gradle-plugin" }
-com-android-library = { id = "com.android.library", version.ref = "android-gradle-plugin" }
-org-jetbrains-compose-multiplatform  = { id = "org.jetbrains.compose", version.ref = "org-jetbrains-compose-multiplatform" }
-org-jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "org-jetbrains-kotlin" }
-org-jetbrains-kotlin-compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "org-jetbrains-kotlin" }
+android-application = { id = "com.android.application", version.ref = "android-gradle-plugin" }
+android-library = { id = "com.android.library", version.ref = "android-gradle-plugin" }
+jetbrains-compose-multiplatform = { id = "org.jetbrains.compose", version.ref = "jetbrains-compose-multiplatform" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 google-gms-oss-license = { id = "com.google.android.gms.oss-licenses-plugin", version = "0.10.6" }
-org-jetbrains-kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "org-jetbrains-kotlin" }
-com-vanniktech-maven-publish = { id = "com.vanniktech.maven.publish", version = "0.31.0" }
+kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+vanniktech-maven-publish = { id = "com.vanniktech.maven.publish", version = "0.31.0" }
 
 [bundles]
 

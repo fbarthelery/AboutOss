@@ -24,9 +24,9 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 plugins {
     id("com.android.library")
     kotlin("multiplatform")
-    alias(libs.plugins.org.jetbrains.kotlin.compose.compiler)
-    alias(libs.plugins.org.jetbrains.compose.multiplatform)
-    alias(libs.plugins.org.jetbrains.kotlinx.serialization)
+    alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.jetbrains.compose.multiplatform)
+    alias(libs.plugins.kotlinx.serialization)
     id("com.geekorum.build.source-license-checker")
     id("com.geekorum.build.maven-publish")
 }
@@ -59,13 +59,13 @@ kotlin {
             api(project(":ui:common"))
             implementation(project(":core"))
             implementation(compose.material3)
-            implementation(libs.org.jetbrains.compose.material.icons.core)
+            implementation(libs.jetbrains.compose.materialIconsCore)
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
-            implementation(libs.org.jetbrains.androidx.navigation.compose)
-            implementation(libs.org.jetbrains.androidx.compose.material3.adaptive.navigation)
-            implementation(libs.org.jetbrains.compose.ui.backhandler)
-            implementation(libs.org.jetbrains.androidx.lifecycle.viewmodel.compose)
+            implementation(libs.jetbrains.androidx.navigation.compose)
+            implementation(libs.jetbrains.compose.material3AdaptiveNavigation)
+            implementation(libs.jetbrains.compose.uiBackhandler)
+            implementation(libs.jetbrains.androidx.lifecycle.viewModelCompose)
         }
 
         androidMain.dependencies {
@@ -123,7 +123,7 @@ dependencies {
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
     afterEvaluate {
-        "androidDebugImplementation"(libs.androidx.compose.ui.tooling)
+        "androidDebugImplementation"(libs.androidx.compose.uiTooling)
     }
 }
 
