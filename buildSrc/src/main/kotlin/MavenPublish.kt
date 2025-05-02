@@ -23,6 +23,7 @@ package com.geekorum.build
 
 import com.vanniktech.maven.publish.MavenPublishBaseExtension
 import com.vanniktech.maven.publish.MavenPublishPlugin
+import com.vanniktech.maven.publish.SonatypeHost
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.apply
 import org.gradle.kotlin.dsl.configure
@@ -30,14 +31,13 @@ import org.gradle.kotlin.dsl.configure
 internal fun Project.configureMavenPublish() {
     apply<MavenPublishPlugin>()
 
-    configure<MavenPublishBaseExtension>() {
-//        TODO
-//        publishToMavenCentral(SonatypeHost.DEFAULT)
-//        signAllPublications()
+    configure<MavenPublishBaseExtension> {
+        publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
+        signAllPublications()
 
         // default pom info. each field can be overridden in specific project
         pom {
-            name.set(project.name)
+            name.set("${project.group}:${project.name}")
             description.set("A library to retrieve and display opensource licenses in applications")
             inceptionYear.set("2023")
             val githubUrl = "https://github.com/fbarthelery/AboutOss/"
