@@ -89,6 +89,7 @@ org-jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.re
 org-jetbrains-kotlin-compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "org-jetbrains-kotlin" }
 google-gms-oss-license = { id = "com.google.android.gms.oss-licenses-plugin", version = "0.10.6" }
 org-jetbrains-kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "org-jetbrains-kotlin" }
+com-vanniktech-maven-publish = { id = "com.vanniktech.maven.publish", version = "0.31.0" }
 
 [bundles]
 

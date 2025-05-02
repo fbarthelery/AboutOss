@@ -27,7 +27,7 @@ plugins {
     id("com.geekorum.build.source-license-checker")
     alias(libs.plugins.org.jetbrains.compose.multiplatform)
     alias(libs.plugins.org.jetbrains.kotlin.compose.compiler)
-    `maven-publish`
+    id("com.geekorum.build.maven-publish")
 }
 
 group = "com.geekorum.aboutoss"
@@ -120,27 +120,10 @@ dependencies {
     }
 }
 
-publishing {
-    publications {
-        val pomConfiguration: (MavenPom).() -> Unit = {
-            name.set("ui-common")
-            description.set("A library to retrieve and display opensource licenses in Android applications")
-            licenses {
-                license {
-                    name.set("GPL-3.0-or-later")
-                    url.set("https://www.gnu.org/licenses/gpl-3.0.html")
-                    distribution.set("repo")
-                }
-            }
-            inceptionYear.set("2023")
-        }
-
-        register<MavenPublication>("release") {
-            afterEvaluate {
-                from(components["release"])
-            }
-            artifactId = "ui-common"
-            pom(pomConfiguration)
-        }
+mavenPublishing {
+    val artifactId = "ui-common"
+    coordinates(groupId = group.toString(), artifactId, version.toString())
+    pom {
+        name = artifactId
     }
 }

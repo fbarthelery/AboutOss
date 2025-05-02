@@ -26,7 +26,7 @@ plugins {
     kotlin("multiplatform")
     id("com.geekorum.build.source-license-checker")
     alias(libs.plugins.org.jetbrains.kotlinx.serialization)
-    `maven-publish`
+    id("com.geekorum.build.maven-publish")
 }
 
 group = "com.geekorum.aboutoss"
@@ -104,27 +104,7 @@ dependencies {
     androidTestImplementation(libs.espresso.core)
 }
 
-publishing {
-    publications {
-        val pomConfiguration: (MavenPom).() -> Unit = {
-            name.set("core")
-            description.set("A library to retrieve and display opensource licenses in Android applications")
-            licenses {
-                license {
-                    name.set("GPL-3.0-or-later")
-                    url.set("https://www.gnu.org/licenses/gpl-3.0.html")
-                    distribution.set("repo")
-                }
-            }
-            inceptionYear.set("2023")
-        }
-
-        register<MavenPublication>("release") {
-            afterEvaluate {
-                from(components["release"])
-            }
-            artifactId = "core"
-            pom(pomConfiguration)
-        }
-    }
+mavenPublishing {
+    coordinates(groupId = group.toString(), name, version.toString())
 }
+
