@@ -20,6 +20,7 @@
 
 [versions]
 android-gradle-plugin = "8.9.2"
+dokka = "2.0.0"
 kotlin = "2.1.20"
 jetbrains-compose-multiplatform = "1.8.0-rc01" # rc for adaptive
 junit = "4.13.2"
@@ -70,12 +71,13 @@ androidx-compose-uiTestManifest = { group = "androidx.compose.ui", name = "ui-te
 androidx-compose-uiTestJunit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
-
+dokka-android-plugin = { module = "org.jetbrains.dokka:android-documentation-plugin", version.ref = "dokka" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "android-gradle-plugin" }
 android-library = { id = "com.android.library", version.ref = "android-gradle-plugin" }
 jetbrains-compose-multiplatform = { id = "org.jetbrains.compose", version.ref = "jetbrains-compose-multiplatform" }
+dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 google-gms-oss-license = { id = "com.google.android.gms.oss-licenses-plugin", version = "0.10.6" }

@@ -26,6 +26,7 @@ import com.vanniktech.maven.publish.MavenPublishPlugin
 import com.vanniktech.maven.publish.SonatypeHost
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.apply
+import org.gradle.kotlin.dsl.assign
 import org.gradle.kotlin.dsl.configure
 
 internal fun Project.configureMavenPublish() {
@@ -37,32 +38,31 @@ internal fun Project.configureMavenPublish() {
 
         // default pom info. each field can be overridden in specific project
         pom {
-            name.set("${project.group}:${project.name}")
-            description.set("A library to retrieve and display opensource licenses in applications")
-            inceptionYear.set("2023")
+            name = "${project.group}:${project.name}"
+            description = "A library to retrieve and display opensource licenses in applications"
+            inceptionYear = "2023"
             val githubUrl = "https://github.com/fbarthelery/AboutOss/"
-            url.set(githubUrl)
+            url = githubUrl
             scm {
-                url.set(githubUrl)
-                connection.set("scm:git:$githubUrl.git")
+                url = githubUrl
+                connection = "scm:git:$githubUrl.git"
             }
 
             licenses {
                 license {
-                    name.set("GPL-3.0-or-later")
-                    url.set("https://www.gnu.org/licenses/gpl-3.0.html")
-                    distribution.set("repo")
+                    name = "GPL-3.0-or-later"
+                    url = "https://www.gnu.org/licenses/gpl-3.0.html"
+                    distribution = "repo"
                 }
             }
 
             developers {
                 developer {
-                    id.set("da_risk")
-                    name.set("Frédéric Barthéléry")
-                    email.set("da_risk@geekorum.com")
+                    id = "da_risk"
+                    name = "Frédéric Barthéléry"
+                    email = "da_risk@geekorum.com"
                 }
             }
         }
     }
-
 }

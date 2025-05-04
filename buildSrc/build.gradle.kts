@@ -67,6 +67,8 @@ dependencies {
     implementation(libs.plugins.kotlin.android.gav())
     implementation("gradle.plugin.com.hierynomus.gradle.plugins:license-gradle-plugin:0.16.1")
     implementation(libs.plugins.vanniktech.maven.publish.gav())
+    implementation(libs.plugins.dokka.gav())
+    implementation(libs.dokka.android.plugin)
     implementation("com.geekorum.gradle.avdl:plugin:0.0.3")
     implementation("com.geekorum.gradle.avdl:flydroid:0.0.3")
 }
