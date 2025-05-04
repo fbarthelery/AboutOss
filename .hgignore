@@ -65,3 +65,6 @@ res/raw/third_party_license*
 
 # Android studio captures
 captures/
+
+# generated api docs
+docs/api/

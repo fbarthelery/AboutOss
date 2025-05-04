@@ -32,4 +32,9 @@ dependencies {
 
 dokka {
     moduleName = "AboutOss"
+    dokkaPublications {
+        html {
+            outputDirectory = rootDir.resolve("docs/api")
+        }
+    }
 }

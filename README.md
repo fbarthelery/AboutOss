@@ -13,13 +13,13 @@ You can integrate it in your application with few simple steps.
 
 In your app-level `build.gradle`, apply the plugin by adding the following line under the existing `apply plugin: 'com.android.application'` at the top of the file:
 
-```build.gradle.kts
+```kotlin title="build.gradle.kts"
 apply plugin: 'com.google.android.gms.oss-licenses-plugin'
 ```
 
 ### Add the ui library to your application
 
-```build.gradle.kts
+```kotlin title="build.gradle.kts"
 repositories {
     maven {
         url = uri("https://jitpack.io")
@@ -33,7 +33,7 @@ dependencies {
 
 ### Launch the license activity
 
-```
+```kotlin
 val intent = Intent(this, OpenSourceLicensesActivity::class.java)
 startActivity(intent)
 ```
