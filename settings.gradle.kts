@@ -32,3 +32,5 @@ include(":ui:common")
 include(":ui:material2")
 include(":ui:material3")
 include(":sample")
+include(":dokka")
+

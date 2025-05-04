@@ -29,6 +29,7 @@ plugins {
     alias(libs.plugins.kotlinx.serialization)
     id("com.geekorum.build.source-license-checker")
     id("com.geekorum.build.maven-publish")
+    id("com.geekorum.build.dokka")
 }
 
 group = "com.geekorum.aboutoss"
@@ -127,4 +128,8 @@ mavenPublishing {
     pom {
         name = artifactId
     }
+}
+
+dokka {
+    moduleName = "ui-material"
 }

@@ -28,6 +28,7 @@ plugins {
     alias(libs.plugins.jetbrains.compose.multiplatform)
     alias(libs.plugins.kotlin.compose)
     id("com.geekorum.build.maven-publish")
+    id("com.geekorum.build.dokka")
 }
 
 group = "com.geekorum.aboutoss"
@@ -126,4 +127,8 @@ mavenPublishing {
     pom {
         name = artifactId
     }
+}
+
+dokka {
+    moduleName = "ui-common"
 }

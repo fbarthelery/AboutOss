@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-
 /*
  * AboutOss is an utility library to retrieve and display
  * opensource licenses in Android applications.
@@ -21,12 +19,15 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
  * You should have received a copy of the GNU General Public License
  * along with AboutOss.  If not, see <http://www.gnu.org/licenses/>.
  */
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 plugins {
     id("com.android.library")
     kotlin("multiplatform")
     id("com.geekorum.build.source-license-checker")
     alias(libs.plugins.kotlinx.serialization)
     id("com.geekorum.build.maven-publish")
+    id("com.geekorum.build.dokka")
 }
 
 group = "com.geekorum.aboutoss"
