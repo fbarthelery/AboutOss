@@ -34,6 +34,10 @@ import com.geekorum.aboutoss.ui.common.Factory
 import com.geekorum.aboutoss.ui.common.OpenSourceLicensesViewModel
 import org.jetbrains.compose.resources.stringResource
 
+
+/**
+ * Display opensource licences in a new window
+ */
 @Composable
 fun OpenSourceLicensesWindow(
     onCloseRequest: () -> Unit,
@@ -46,6 +50,9 @@ fun OpenSourceLicensesWindow(
     OpenSourceLicensesWindow(onCloseRequest, state, viewModel)
 }
 
+/**
+ * Display opensource licences in a new window
+ */
 @Composable
 fun OpenSourceLicensesWindow(
     onCloseRequest: () -> Unit,
