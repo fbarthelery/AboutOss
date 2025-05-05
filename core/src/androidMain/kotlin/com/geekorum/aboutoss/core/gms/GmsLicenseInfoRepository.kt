@@ -24,6 +24,7 @@ package com.geekorum.aboutoss.core.gms
 import android.content.Context
 import com.geekorum.aboutoss.core.LicenseInfoRepository
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import okio.source
 
@@ -32,8 +33,8 @@ import okio.source
  */
 class GmsLicenseInfoRepository(
     private val appContext: Context,
-    private val mainCoroutineDispatcher: CoroutineDispatcher,
-    private val ioCoroutineDispatcher: CoroutineDispatcher,
+    private val mainCoroutineDispatcher: CoroutineDispatcher = Dispatchers.Main,
+    private val ioCoroutineDispatcher: CoroutineDispatcher = Dispatchers.IO,
     private val thirdPartyLicensesResourceName: String = "third_party_licenses",
     private val thirdPartyLicenseMetadataResourceName: String = "third_party_license_metadata"
 ) : LicenseInfoRepository {

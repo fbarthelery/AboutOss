@@ -23,14 +23,16 @@ package com.geekorum.aboutoss.core.licenseplist
 
 import com.geekorum.aboutoss.core.LicenseInfoRepository
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.IO
 import kotlinx.coroutines.withContext
 
 /**
  * Retrieve license information produced by [LicensePlist](https://github.com/mono0926/LicensePlist)
  */
 class LicensePlistLicenseInfoRepository(
-    private val mainCoroutineDispatcher: CoroutineDispatcher,
-    private val ioCoroutineDispatcher: CoroutineDispatcher
+    private val mainCoroutineDispatcher: CoroutineDispatcher = Dispatchers.Main,
+    private val ioCoroutineDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : LicenseInfoRepository{
 
     private var licensesInfo: Map<String, String>? = null
