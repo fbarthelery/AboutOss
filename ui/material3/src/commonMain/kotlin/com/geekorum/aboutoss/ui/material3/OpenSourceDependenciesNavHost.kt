@@ -37,6 +37,9 @@ private data class DependencyLicense(
     val dependency: String
 )
 
+/**
+ * Display opensource licences using [androidx.navigation.NavHost]
+ */
 @Composable
 fun OpenSourceDependenciesNavHost(
     openSourceLicensesViewModel: OpenSourceLicensesViewModel,

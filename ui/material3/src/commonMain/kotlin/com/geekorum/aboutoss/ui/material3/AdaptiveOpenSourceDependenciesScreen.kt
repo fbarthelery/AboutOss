@@ -76,6 +76,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.backhandler.BackHandler
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.text.ExperimentalTextApi
+import androidx.compose.ui.text.LinkAnnotation
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -88,6 +89,9 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 import com.geekorum.aboutoss.common.generated.resources.Res as CommonRes
 
 
+/**
+ * Display opensource licences in an adaptive screen
+ */
 @OptIn(ExperimentalMaterial3AdaptiveApi::class)
 @Composable
 fun AdaptiveOpenSourceDependenciesScreen(
@@ -139,6 +143,13 @@ fun AdaptiveOpenSourceDependenciesScreen(
     )
 }
 
+/**
+ * Display opensource licences in an adaptive screen
+ *
+ * @param dependenciesListPane the pane that display dependencies list
+ * @param dependencyLicensePane the pane that display license of dependency
+ * @param modifier Modifier of the screen
+ */
 @OptIn(ExperimentalMaterial3AdaptiveApi::class, ExperimentalComposeUiApi::class)
 @Composable
 fun AdaptiveOpenSourceDependenciesScreen(
@@ -321,7 +332,9 @@ private fun OpenSourceLicensePane(
     val linkifiedLicense = linkifyText(text = license, onUrlClick = onUrlClick)
     LaunchedEffect(linkifiedLicense) {
         val uris =
-            linkifiedLicense.getUrlAnnotations(0, linkifiedLicense.length).map { it.item.url }
+            linkifiedLicense.getLinkAnnotations(0, linkifiedLicense.length).map { it.item }
+                .filterIsInstance<LinkAnnotation.Url>()
+                .map { it.url }
         onUrlsFound(uris)
     }
 
@@ -359,11 +372,18 @@ private fun OpenSourceLicensePane(
     }
 }
 
+/**
+ * Scope for the children of [AdaptiveOpenSourceDependenciesScreen]
+ */
 @Stable
 interface OpenSourcePaneScope {
+
     val isSinglePane: Boolean
     val selectedDependency: String?
 
+    /**
+     * Navigate to display the license details of [dependency]
+     */
     suspend fun showLicenseDetails(dependency: String)
 
     suspend fun navigateBack()
