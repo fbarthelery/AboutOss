@@ -21,12 +21,15 @@
  */
 package com.geekorum.aboutoss.ui.common
 
-import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.APPLICATION_KEY
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.geekorum.aboutoss.core.LicenseInfoRepository
 
-
+/**
+ * Create a [androidx.lifecycle.ViewModelProvider.Factory] to build an [OpenSourceLicensesViewModel]
+ *
+ * @param licenseInfoRepository the [LicenseInfoRepository] to use
+ */
 fun OpenSourceLicensesViewModel.Companion.Factory(licenseInfoRepository: LicenseInfoRepository) = viewModelFactory {
     initializer {
         OpenSourceLicensesViewModel(

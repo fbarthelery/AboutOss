@@ -40,10 +40,16 @@ class OpenSourceLicensesViewModel(
         emit(licenseInfoRepository.getLicensesInfo())
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyMap())
 
+    /**
+     * List of dependencies
+     */
     val dependenciesList = licensesInfo.map { licensesInfo ->
         licensesInfo.keys.sortedBy { it.lowercase() }
     }
 
+    /**
+     * Obtain the license for [dependency]
+     */
     fun getLicenseDependency(dependency: String) = flow {
         emit(licenseInfoRepository.getLicenseFor(dependency))
     }

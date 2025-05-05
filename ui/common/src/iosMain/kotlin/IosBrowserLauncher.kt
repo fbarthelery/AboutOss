@@ -27,6 +27,9 @@ import platform.Foundation.NSURL.Companion.URLWithString
 import platform.UIKit.UIApplication
 
 
+/**
+ * A [BrowserLauncher] for the iOS platform
+ */
 class IosBrowserLauncher : BrowserLauncher {
 
     override fun launchUrl(link: String) {
@@ -40,6 +43,9 @@ class IosBrowserLauncher : BrowserLauncher {
     override fun mayLaunchUrl(vararg uris: String) {}
 }
 
+/**
+ * Creates and [androidx.compose.runtime.remember] a [BrowserLauncher]
+ */
 @Composable
 actual fun rememberBrowserLauncher(): BrowserLauncher {
     return remember { IosBrowserLauncher() }

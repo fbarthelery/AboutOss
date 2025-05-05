@@ -30,10 +30,17 @@ import androidx.compose.runtime.remember
 import androidx.core.net.toUri
 import com.geekorum.geekdroid.network.BrowserLauncher as GeekdroidBrowserLauncher
 
+/**
+ * A [BrowserLauncher] for the Android platform
+ */
 class AndroidBrowserLauncher(
     private val activity: Activity,
     private val delegate: GeekdroidBrowserLauncher
 ) : BrowserLauncher {
+
+    /**
+     * Warm up the [com.geekorum.aboutoss.ui.common.AndroidBrowserLauncher] before usage
+     */
     fun warmUp() {
         delegate.warmUp(null)
     }
@@ -47,11 +54,17 @@ class AndroidBrowserLauncher(
         delegate.mayLaunchUrl(*asUris)
     }
 
+    /**
+     * Free any resources used
+     */
     fun shutdown() {
         delegate.shutdown()
     }
 }
 
+/**
+ * Creates and [androidx.compose.runtime.remember] a [BrowserLauncher]
+ */
 @Composable
 actual fun rememberBrowserLauncher(): BrowserLauncher {
     val activity = checkNotNull(LocalActivity.current)

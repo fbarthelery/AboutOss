@@ -29,11 +29,22 @@ import androidx.compose.runtime.Composable
  */
 interface BrowserLauncher {
 
+    /**
+     * Launch a browser to display [link]
+     */
     fun launchUrl(link: String)
 
+    /**
+     * Signal that [uris] may be launched next
+     *
+     * A [BrowserLauncher] can preload these uris for faster display
+     */
     fun mayLaunchUrl(vararg uris: String)
 
 }
 
+/**
+ * Creates and [androidx.compose.runtime.remember] a [BrowserLauncher]
+ */
 @Composable
 expect fun rememberBrowserLauncher(): BrowserLauncher

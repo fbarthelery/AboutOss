@@ -23,6 +23,9 @@ package com.geekorum.aboutoss.ui.common
 
 import androidx.activity.ComponentActivity
 
+/**
+ * An abstract Activity to display OpenSource licenses
+ */
 abstract class BaseOpensourceLicenseActivity : ComponentActivity() {
     protected abstract val viewModel: OpenSourceLicensesViewModel
 

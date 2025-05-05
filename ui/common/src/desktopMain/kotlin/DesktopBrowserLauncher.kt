@@ -27,6 +27,9 @@ import java.awt.Desktop
 import java.net.URI
 import java.util.Locale
 
+/**
+ * A [BrowserLauncher] for the desktop platform
+ */
 class DesktopBrowserLauncher : BrowserLauncher {
 
     private val desktopLauncher = run {
@@ -64,6 +67,9 @@ class DesktopBrowserLauncher : BrowserLauncher {
 
 }
 
+/**
+ * Creates and [androidx.compose.runtime.remember] a [BrowserLauncher]
+ */
 @Composable
 actual fun rememberBrowserLauncher(): BrowserLauncher {
     return remember { DesktopBrowserLauncher() }
