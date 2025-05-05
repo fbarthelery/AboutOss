@@ -1,0 +1,10 @@
+# .github/workflows/publish.yml
+
+name: Publish website
+on:
+  workflow_dispatch:
+  release:
+    types: [released, prereleased]
+
+jobs:
+  
