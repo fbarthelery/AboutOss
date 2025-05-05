@@ -25,16 +25,25 @@ import android.annotation.SuppressLint
 import android.content.Context
 import java.io.InputStream
 
+/**
+ * Open the default third_party_licenses file stored in app resources
+ */
 @SuppressLint("DiscouragedApi")
 fun OssLicenseParser.Companion.openDefaultThirdPartyLicenses(context: Context): InputStream {
     return openRawResourcesByName(context, "third_party_licenses")
 }
 
+/**
+ * Open the default third_party_licenses_metadata file stored in app resources
+ */
 @SuppressLint("DiscouragedApi")
 fun OssLicenseParser.Companion.openDefaultThirdPartyLicensesMetadata(context: Context): InputStream {
     return openRawResourcesByName(context, "third_party_license_metadata")
 }
 
+/**
+ * Open the a raw resource file stored in app resources
+ */
 @SuppressLint("DiscouragedApi")
 fun OssLicenseParser.Companion.openRawResourcesByName(context: Context, name: String): InputStream {
     val resourceId = context.resources.getIdentifier(name, "raw", context.packageName)

@@ -33,6 +33,9 @@ import platform.Foundation.NSData
 import platform.Foundation.NSFileManager
 import platform.posix.memcpy
 
+/**
+ * Create a [com.geekorum.aboutoss.core.licensee.LicenseeLicenseInfoRepository]
+ */
 fun LicenseeLicenseInfoRepository(
     licenseeResourcePath: String = "compose-resources/app/cash/licensee/artifacts.json",
     mainCoroutineDispatcher: CoroutineDispatcher = Dispatchers.Main,

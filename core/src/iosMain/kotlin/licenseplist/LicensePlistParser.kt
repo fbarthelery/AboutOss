@@ -39,8 +39,17 @@ import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
 
+/**
+ * Parse LicensePlist files
+ */
 class LicensePlistParser {
 
+    /**
+     * Parse LicensePlist files
+     *
+     * @param licensePlistInput url of com.mono0926.LicensePlist.plist file
+     * @return a map of dependency name to license
+     */
     @Suppress("UNCHECKED_CAST")
     suspend fun parseLicenses(
         licensePlistInput: NSURL
@@ -95,6 +104,9 @@ class LicensePlistParser {
     }
 
     companion object {
+        /**
+         * Get url of the default LicensePlist file
+         */
         fun getDefaultLicensePlistUrl(): NSURL {
             val path = NSBundle.mainBundle.pathForResource(
                 "com.mono0926.LicensePlist",

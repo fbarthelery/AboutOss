@@ -25,6 +25,9 @@ import com.geekorum.aboutoss.core.LicenseInfoRepository
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 
+/**
+ * Retrieve license information produced by [LicensePlist](https://github.com/mono0926/LicensePlist)
+ */
 class LicensePlistLicenseInfoRepository(
     private val mainCoroutineDispatcher: CoroutineDispatcher,
     private val ioCoroutineDispatcher: CoroutineDispatcher

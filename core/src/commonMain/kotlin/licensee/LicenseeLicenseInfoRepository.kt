@@ -27,6 +27,9 @@ import kotlinx.coroutines.withContext
 import kotlinx.serialization.ExperimentalSerializationApi
 import okio.Source
 
+/**
+ * Retrieve license information produced by [licensee](https://github.com/cashapp/licensee)
+ */
 class LicenseeLicenseInfoRepository(
     private val produceInput: suspend () -> Source,
     private val mainCoroutineDispatcher: CoroutineDispatcher,

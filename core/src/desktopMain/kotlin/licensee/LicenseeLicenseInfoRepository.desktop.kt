@@ -25,6 +25,9 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import okio.Buffer
 
+/**
+ * Create a [com.geekorum.aboutoss.core.licensee.LicenseeLicenseInfoRepository]
+ */
 fun LicenseeLicenseInfoRepository(
     licenseeResourcePath: String = "app/cash/licensee/artifacts.json",
     mainCoroutineDispatcher: CoroutineDispatcher = Dispatchers.Main,
