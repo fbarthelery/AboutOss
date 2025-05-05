@@ -39,6 +39,18 @@ internal fun Project.configureDokka() {
                 localDirectory = rootDir
                 remoteUrl = uri("https://github.com/fbarthelery/AboutOss/tree/main/")
             }
+
+            externalDocumentationLinks.register("okio") {
+                url = uri("https://square.github.io/okio/3.x/okio/okio/")
+            }
+            externalDocumentationLinks.register("kotlinx-coroutines") {
+                url = uri("https://kotlinlang.org/api/kotlinx.coroutines/")
+            }
+
+            perPackageOption {
+                matchingRegex = ".*\\.generated\\.resources"
+                suppress = true
+            }
         }
     }
 

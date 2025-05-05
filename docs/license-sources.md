@@ -1,0 +1,62 @@
+License sources
+===============
+
+Setup
+=====
+
+Add the dependency to your project
+
+```kotlin title="build.gradle.kts"
+dependencies {
+    implementation("com.geekorum.aboutoss:core:<latest-version>")
+}
+```
+
+OSS Licenses Gradle Plugin
+--------------------------
+
+The [OSS Licenses Gradle Plugin](https://github.com/google/play-services-plugins/tree/main/oss-licenses-plugin) stores license information in Android resources.
+
+Create a [GmsLicenseInfoRepository](api/core/com.geekorum.aboutoss.core.gms/-gms-license-info-repository/index.html) to retrieves it.
+
+The `GmsLicenseInfoRepository` is only available on Android platform.
+
+```kotlin
+ val licenseInfoRepository = GmsLicenseInfoRepository(
+        appContext = application
+    )
+```
+
+
+Licensee
+--------
+
+[licensee](https://github.com/cashapp/licensee) report file can be used as a source of license information.
+
+Create a [LicenseeLicenseInfoRepository](api/core/com.geekorum.aboutoss.core.licensee/-licensee-license-info-repository/index.html) to read the report file.
+
+
+```kotlin title="on iOS and Desktop"
+val licenseInfoRepository = LicenseeLicenseInfoRepository()
+```
+
+```kotlin title="on Android"
+val licenseInfoRepository = LicenseeLicenseInfoRepository(
+    assetManager = application.assets
+)
+```
+
+LicensePlist
+------------
+
+On iOS, [LicensePlist](https://github.com/mono0926/LicensePlist) can be use to automatically generates a Plist of all your dependencies.
+
+Use [LicensePlistLicenseInfoRepository](api/core/com.geekorum.aboutoss.core.licenseplist/-license-plist-license-info-repository/index.html)
+to parse license information stored in your resources bundle.
+
+The `LicensePlistLicenseInfoRepository` is only available on iOS platform.
+
+```kotlin
+val licenseInfoRepository = LicensePlistLicenseInfoRepository()
+```
+

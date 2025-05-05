@@ -38,5 +38,9 @@ markdown_extensions:
 
 nav:
   - Home: index.md
+  - License sources: license-sources.md
+  - User interface:
+      - Material: ui-material.md
+      - Material3: ui-material3.md
   - API: api/index.html
   - "Discussions ⏏": https://github.com/fbarthelery/AboutOss/discussions
