@@ -59,6 +59,7 @@ import androidx.compose.material3.adaptive.layout.ListDetailPaneScaffold
 import androidx.compose.material3.adaptive.layout.ListDetailPaneScaffoldRole
 import androidx.compose.material3.adaptive.layout.PaneAdaptedValue
 import androidx.compose.material3.adaptive.layout.ThreePaneScaffoldValue
+import androidx.compose.material3.adaptive.navigation.BackNavigationBehavior
 import androidx.compose.material3.adaptive.navigation.ThreePaneScaffoldNavigator
 import androidx.compose.material3.adaptive.navigation.rememberListDetailPaneScaffoldNavigator
 import androidx.compose.material3.rememberTopAppBarState
@@ -73,7 +74,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.backhandler.BackHandler
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.text.ExperimentalTextApi
 import androidx.compose.ui.text.LinkAnnotation
@@ -159,12 +159,7 @@ fun AdaptiveOpenSourceDependenciesScreen(
     modifier: Modifier = Modifier
 ) {
     val navigator = rememberListDetailPaneScaffoldNavigator<String>()
-    val coroutineScope = rememberCoroutineScope()
-    BackHandler(navigator.canNavigateBack()) {
-        coroutineScope.launch {
-            navigator.navigateBack()
-        }
-    }
+    ThreePaneScaffoldPredictiveBackHandler(navigator, BackNavigationBehavior.PopUntilScaffoldValueChange)
 
     val scope = remember(navigator) { DefaultOpenSourcePaneScope(navigator)  }
     ListDetailPaneScaffold(
@@ -412,8 +407,24 @@ private class DefaultOpenSourcePaneScope(
 
 
 @OptIn(ExperimentalMaterial3AdaptiveApi::class)
+private val ThreePaneScaffoldValue.expandedCount: Int
+    get() {
+        var count = 0
+        if (primary == PaneAdaptedValue.Expanded) {
+            count++
+        }
+        if (secondary == PaneAdaptedValue.Expanded) {
+            count++
+        }
+        if (tertiary == PaneAdaptedValue.Expanded) {
+            count++
+        }
+        return count
+    }
+
+@OptIn(ExperimentalMaterial3AdaptiveApi::class)
 private fun ThreePaneScaffoldValue.isSinglePane(): Boolean {
-    return primary == PaneAdaptedValue.Expanded && secondary == PaneAdaptedValue.Hidden && tertiary == PaneAdaptedValue.Hidden
+    return expandedCount == 1
 }
 
 
