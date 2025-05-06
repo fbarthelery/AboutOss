@@ -27,9 +27,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.geekorum.aboutoss.ui.common.OpenSourceLicensesViewModel
+import com.geekorum.aboutoss.ui.material3.AdaptiveOpenSourceDependenciesScreen
 import kotlinx.serialization.Serializable
 import com.geekorum.aboutoss.ui.material.OpenSourceDependenciesNavHost as Material2OpenSourceDependenciesNavHost
-import com.geekorum.aboutoss.ui.material3.OpenSourceDependenciesNavHost as Material3OpenSourceDependenciesNavHost
 
 
 @Serializable
@@ -85,7 +85,7 @@ fun Material3Screen(navigateUp: () -> Unit) {
     val viewModel: OpenSourceLicensesViewModel = viewModel(initializer = {
         createPrebuildOpenSourceLicensesViewModel()
     })
-    Material3OpenSourceDependenciesNavHost(
+    AdaptiveOpenSourceDependenciesScreen(
         openSourceLicensesViewModel = viewModel,
         navigateUp = navigateUp
     )

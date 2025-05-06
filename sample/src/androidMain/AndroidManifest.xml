@@ -50,7 +50,7 @@
         </activity>
 
         <activity android:name=".PrebuiltLicencesMaterial2Activity"
-            android:theme="@android:style/Theme.Material.Light.NoActionBar"
+            android:theme="@style/Theme.AboutOss.Material2"
             android:exported="false" />
 
         <activity android:name=".PrebuiltLicencesMaterial3Activity"

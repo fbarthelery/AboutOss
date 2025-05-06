@@ -98,7 +98,7 @@ android {
     defaultConfig {
         applicationId = "com.geekorum.aboutoss.sampleapp"
         minSdk = 28
-        targetSdk = 33
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 

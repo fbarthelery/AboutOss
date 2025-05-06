@@ -30,6 +30,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -43,11 +44,8 @@ fun SampleApp(
     onMaterial2Click: () -> Unit,
     onMaterial3Click: () -> Unit,
 ) {
-    Surface(
-        modifier = Modifier.fillMaxSize(),
-        color = MaterialTheme.colorScheme.background
-    ) {
-        Column(Modifier.fillMaxSize()) {
+    Scaffold {
+        Column(Modifier.fillMaxSize().padding(it)) {
             LaunchActivitySection(onMaterial2Click, onMaterial3Click)
             CustomViewer(modifier = Modifier.padding(horizontal = 16.dp))
         }
