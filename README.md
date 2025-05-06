@@ -4,6 +4,9 @@
 AboutOss
 ==========
 
+### [fbarthelery.github.io/AboutOss](https://fbarthelery.github.io/AboutOss/)
+
+
 AboutOss is a Kotlin Multiplatform utility library to retrieve and display opensource licenses in your applications.
 
 ```kotlin title="build.gradle.kts"
