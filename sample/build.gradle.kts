@@ -93,11 +93,11 @@ kotlin {
 
 android {
     namespace = "com.geekorum.aboutoss.sampleapp"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.geekorum.aboutoss.sampleapp"
-        minSdk = 24
+        minSdk = 28
         targetSdk = 33
         versionCode = 1
         versionName = "1.0"

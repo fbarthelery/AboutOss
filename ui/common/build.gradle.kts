@@ -19,27 +19,17 @@
  * You should have received a copy of the GNU General Public License
  * along with AboutOss.  If not, see <http://www.gnu.org/licenses/>.
  */
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
-    id("com.android.library")
-    kotlin("multiplatform")
-    id("com.geekorum.build.source-license-checker")
+    id("com.geekorum.build.conventions.mpp-library-with-android")
     alias(libs.plugins.jetbrains.compose.multiplatform)
     alias(libs.plugins.kotlin.compose)
     id("com.geekorum.build.maven-publish")
     id("com.geekorum.build.dokka")
 }
 
-group = "com.geekorum.aboutoss"
-version = "0.1.0"
-
 kotlin {
-    androidTarget {
-        compilerOptions {
-            jvmTarget.set(JvmTarget.JVM_17)
-        }
-    }
+    androidTarget()
 
     jvm("desktop")
 
@@ -76,18 +66,10 @@ compose.resources {
 
 android {
     namespace = "com.geekorum.aboutoss.ui.common"
-    compileSdk = 35
 
     defaultConfig {
-        minSdk = 24
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
-
-        aarMetadata {
-            minCompileSdk = 24
-        }
-
     }
 
     buildTypes {
@@ -98,10 +80,6 @@ android {
                 "proguard-rules.pro"
             )
         }
-    }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
     }
 
     publishing {
