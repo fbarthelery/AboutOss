@@ -96,7 +96,8 @@ import com.geekorum.aboutoss.common.generated.resources.Res as CommonRes
 @Composable
 fun AdaptiveOpenSourceDependenciesScreen(
     openSourceLicensesViewModel: OpenSourceLicensesViewModel,
-    navigateUp: () -> Unit
+    navigateUp: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
     val dependencies by openSourceLicensesViewModel.dependenciesList.collectAsStateWithLifecycle(emptyList())
     val browserLauncher = rememberBrowserLauncher()
@@ -109,7 +110,7 @@ fun AdaptiveOpenSourceDependenciesScreen(
     }
 
     AdaptiveOpenSourceDependenciesScreen(
-        modifier = Modifier.background(MaterialTheme.colorScheme.surface),
+        modifier = modifier.background(MaterialTheme.colorScheme.surface),
         dependenciesListPane = {
             AdaptiveOpenSourceDependenciesListPane(
                 isSinglePane = isSinglePane,

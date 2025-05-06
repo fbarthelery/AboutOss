@@ -22,6 +22,7 @@
 package com.geekorum.aboutoss.ui.material3
 
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -29,8 +30,12 @@ import androidx.navigation.toRoute
 import com.geekorum.aboutoss.ui.common.OpenSourceLicensesViewModel
 import kotlinx.serialization.Serializable
 
+// should be private but we have a weird IllegalAccessException on Desktop
+// IllegalAccessException: class kotlinx.serialization.internal.PlatformKt
+// cannot access a member of class com.geekorum.aboutoss.ui.material.DependenciesList
+// with modifiers "public static final"
 @Serializable
-private object DependenciesList
+internal object DependenciesList
 
 @Serializable
 private data class DependencyLicense(
@@ -43,10 +48,11 @@ private data class DependencyLicense(
 @Composable
 fun OpenSourceDependenciesNavHost(
     openSourceLicensesViewModel: OpenSourceLicensesViewModel,
-    navigateUp: () -> Unit
+    navigateUp: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
     val navController = rememberNavController()
-    NavHost(navController, startDestination = DependenciesList) {
+    NavHost(navController, startDestination = DependenciesList, modifier = modifier) {
         composable<DependenciesList> {
             OpenSourceDependenciesListScreen(
                 viewModel = openSourceLicensesViewModel,
