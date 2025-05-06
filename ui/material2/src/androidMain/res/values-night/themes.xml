@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <!--
 
     AboutOss is an utility library to retrieve and display
@@ -21,14 +22,6 @@
     along with AboutOss.  If not, see <http://www.gnu.org/licenses/>.
 
 -->
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
-    <application>
-        <activity android:name=".OpenSourceLicensesActivity"
-            android:theme="@style/Theme.AboutOss.Material2"
-            android:label="@string/title_oss_licenses"
-            android:exported="false"
-            />
-
-    </application>
-
-</manifest>
+<resources>
+    <style name="Theme.AboutOss.Material2" parent="android:Theme.Material.NoActionBar"/>
+</resources>

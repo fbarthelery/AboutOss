@@ -23,12 +23,15 @@ package com.geekorum.aboutoss.ui.material
 
 import android.os.Bundle
 import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import com.geekorum.aboutoss.core.gms.GmsLicenseInfoRepository
 import com.geekorum.aboutoss.ui.common.BaseOpensourceLicenseActivity
 import com.geekorum.aboutoss.ui.common.Factory
@@ -57,9 +60,11 @@ open class OpenSourceLicensesActivity : BaseOpensourceLicenseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
         setContent {
             themeProvider {
                 OpenSourceDependenciesNavHost(
+                    modifier = Modifier.safeDrawingPadding(),
                     openSourceLicensesViewModel = viewModel,
                     navigateUp = {
                         if (!onNavigateUp()) {
