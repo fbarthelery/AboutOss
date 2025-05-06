@@ -1,5 +1,8 @@
-Ui-Material
-===========
+Ui-Material (Deprecated)
+========================
+
+The Material user interface will not receive further updates and is now deprecated.
+Consider using [ui-material3](ui-material3.md) instead.
 
 Setup
 =====

@@ -52,8 +52,8 @@ val licenseInfoRepository = LicenseeLicenseInfoRepository(
 )
 ```
 
-LicensePlist
-------------
+LicensePlist (Experimental)
+---------------------------
 
 On iOS, [LicensePlist](https://github.com/mono0926/LicensePlist) can be use to automatically generates a Plist of all your dependencies.
 
