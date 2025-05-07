@@ -30,6 +30,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.geekorum.aboutoss.ui.common.OpenSourceLicensesViewModel
 
@@ -53,7 +54,7 @@ private fun DependenciesGrid(
     viewModel: OpenSourceLicensesViewModel,
     modifier: Modifier = Modifier
 ) {
-    val dependencies by viewModel.dependenciesList.collectAsState(initial = emptyList())
+    val dependencies by viewModel.dependenciesList.collectAsStateWithLifecycle(emptyList())
     var selected by remember { mutableStateOf(-1) }
     LazyVerticalGrid(
         GridCells.Adaptive(150.dp),
@@ -64,7 +65,7 @@ private fun DependenciesGrid(
         itemsIndexed(dependencies) { idx, dependency ->
             if (idx == selected) {
                 val license by viewModel.getLicenseDependency(dependency)
-                    .collectAsState(initial = "")
+                    .collectAsStateWithLifecycle("")
                 LicenseCard(license, onClick = {
                     selected = -1
                 })
