@@ -38,7 +38,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
@@ -54,6 +53,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.withLink
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.geekorum.aboutoss.ui.common.BrowserLauncher
 import com.geekorum.aboutoss.ui.common.OpenSourceLicensesViewModel
 import com.geekorum.aboutoss.ui.common.rememberBrowserLauncher
@@ -72,7 +72,7 @@ fun OpenSourceLicenseScreen(
     onUpClick: () -> Unit,
     browserLauncher: BrowserLauncher = rememberBrowserLauncher()
 ) {
-    val license by viewModel.getLicenseDependency(dependency).collectAsState("")
+    val license by viewModel.getLicenseDependency(dependency).collectAsStateWithLifecycle("")
     OpenSourceLicenseScreen(
         dependency = dependency,
         license = license,
