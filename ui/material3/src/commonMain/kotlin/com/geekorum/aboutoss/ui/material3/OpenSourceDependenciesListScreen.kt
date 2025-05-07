@@ -40,12 +40,12 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.geekorum.aboutoss.common.generated.resources.title_oss_licenses
 import com.geekorum.aboutoss.ui.common.OpenSourceLicensesViewModel
 import org.jetbrains.compose.resources.stringResource
@@ -64,7 +64,7 @@ fun OpenSourceDependenciesListScreen(
     onDependencyClick: (String) -> Unit,
     onUpClick: () -> Unit
 ) {
-    val dependencies by viewModel.dependenciesList.collectAsState(initial = emptyList())
+    val dependencies by viewModel.dependenciesList.collectAsStateWithLifecycle(initialValue = emptyList())
     OpenSourceDependenciesListScreen(
         dependencies = dependencies,
         onDependencyClick = onDependencyClick,
