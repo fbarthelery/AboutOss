@@ -19,7 +19,7 @@
 # along with AboutOss.  If not, see <http://www.gnu.org/licenses/>.
 
 [versions]
-android-gradle-plugin = "8.9.2"
+android-gradle-plugin = "8.13.0"
 dokka = "2.0.0"
 kotlin = "2.1.20"
 jetbrains-compose-multiplatform = "1.8.0"
