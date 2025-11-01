@@ -24,6 +24,7 @@ package com.geekorum.build
 import com.android.build.api.dsl.AndroidSourceSet
 import com.android.build.gradle.BaseExtension
 import com.android.build.gradle.DynamicFeaturePlugin
+import com.android.build.gradle.TestPlugin
 import com.hierynomus.gradle.license.LicenseBasePlugin
 import com.hierynomus.gradle.license.tasks.LicenseCheck
 import com.hierynomus.gradle.license.tasks.LicenseFormat
@@ -39,7 +40,7 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinProjectExtension
 import org.jetbrains.kotlin.gradle.plugin.KotlinAndroidPluginWrapper
 import org.jetbrains.kotlin.gradle.plugin.KotlinJsPluginWrapper
 import org.jetbrains.kotlin.gradle.plugin.KotlinMultiplatformPluginWrapper
-import java.util.*
+import java.util.Locale
 
 internal fun Project.configureSourceLicenseChecker() {
     apply<LicensePlugin>()
@@ -57,6 +58,13 @@ internal fun Project.configureSourceLicenseChecker() {
     plugins.withType(DynamicFeaturePlugin::class.java) {
         configureAndroid()
     }
+
+    // the LicensePlugin doesn't configure itself properly on Android Test plugin
+    // Copied the code to configure it
+    plugins.withType(TestPlugin::class.java) {
+        configureAndroid()
+    }
+
     // make the license tasks looks for kotlin files in an Android project
     plugins.withType(KotlinAndroidPluginWrapper::class.java) {
         configureKotlinAndroid()
@@ -80,19 +88,42 @@ private fun Project.configureKotlin() {
         val kotlinSource = this
         val sourceSetTaskName =
             "${LicenseBasePlugin.getLICENSE_TASK_BASE_NAME()}${taskInfix}${name.capitalize()}"
-        logger.info("Adding $sourceSetTaskName task for sourceSet ${kotlinSource.name}")
-        if (sourceSetTaskName in tasks.names) {
-            // tasks may have already been added by configuration for the Android plugin
-            logger.info("Tasks $sourceSetTaskName already exists. Skip")
+        if (name.startsWith("generated")) {
+            logger.info("Skip sourceSet $name because it's generated code")
             return@configureEach
         }
-        tasks.register(sourceSetTaskName, LicenseCheck::class.java) {
+        val configureLicenseCheckTaskLambda: LicenseCheck.() -> Unit = {
             source(kotlinSource.kotlin)
+            exclude {
+                // exclude generated files, notably protobuf, ksp, hilt
+                "/generated/" in it.file.path
+            }
+        }
+        if (sourceSetTaskName in tasks.names) {
+            // tasks may have already been added by configuration for the Android plugin
+            logger.info("Tasks $sourceSetTaskName already exists. configure it")
+            tasks.named(sourceSetTaskName, LicenseCheck::class.java, configureLicenseCheckTaskLambda)
+        } else {
+            logger.info("Adding ${project.name}:$sourceSetTaskName task for sourceSet ${kotlinSource.name}")
+            tasks.register(sourceSetTaskName, LicenseCheck::class.java, configureLicenseCheckTaskLambda)
+        }
+
+        val configureLicenseFormatTaskLambda: LicenseFormat.() -> Unit = {
+            source(kotlinSource.kotlin)
+            exclude {
+                // exclude generated files, notably protobuf, ksp, hilt
+                "/generated/" in it.file.path
+            }
         }
         val sourceSetFormatTaskName =
             "${LicenseBasePlugin.getFORMAT_TASK_BASE_NAME()}${taskInfix}${name.capitalize()}"
-        tasks.register(sourceSetFormatTaskName, LicenseFormat::class.java) {
-            source(kotlinSource.kotlin)
+        if (sourceSetFormatTaskName in tasks.names) {
+            // tasks may have already been added by configuration for the Android plugin
+            logger.info("Tasks $sourceSetFormatTaskName already exists. configure it")
+            tasks.named(sourceSetFormatTaskName, LicenseFormat::class.java, configureLicenseFormatTaskLambda)
+        } else {
+            logger.info("Adding ${project.name}:$sourceSetFormatTaskName task for sourceSet ${kotlinSource.name}")
+            tasks.register(sourceSetFormatTaskName, LicenseFormat::class.java, configureLicenseFormatTaskLambda)
         }
     }
 }
@@ -109,11 +140,19 @@ private fun Project.configureKotlinAndroid() {
             "${LicenseBasePlugin.getLICENSE_TASK_BASE_NAME()}${taskInfix}${name.capitalize()}"
         tasks.named(sourceSetTaskName, LicenseCheck::class.java) {
             source(kotlinSource.kotlin, manifest.srcFile)
+            exclude {
+                // exclude generated files, notably protobuf
+                "/generated/" in it.file.path
+            }
         }
         val sourceSetFormatTaskName =
             "${LicenseBasePlugin.getFORMAT_TASK_BASE_NAME()}${taskInfix}${name.capitalize()}"
         tasks.named(sourceSetFormatTaskName, LicenseFormat::class.java) {
             source(kotlinSource.kotlin, manifest.srcFile)
+            exclude {
+                // exclude generated files, notably protobuf
+                "/generated/" in it.file.path
+            }
         }
     }
 }
